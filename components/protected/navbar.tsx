@@ -83,7 +83,7 @@ export function Navbar() {
             pathname !== '/settings' && 'text-muted-foreground'
           )}
         >
-          Configuracion
+          Configuración
         </Link>
       </div>
 
