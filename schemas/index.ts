@@ -24,7 +24,8 @@ export const SignUpSchema = z
     }),
     name: z.string().min(1, {
       message: 'El nombre es obligatorio.'
-    })
+    }),
+    role: z.enum([UserRole.ADMIN, UserRole.TEACHER, UserRole.STUDENT])
   })
   .refine((data) => data.password === data.confirm, {
     message: 'Las contraseñas no coinciden.',
@@ -58,7 +59,7 @@ export const UpdateProfileSchema = z.object({
   email: z.string().email({
     message: 'Se requiere un correo electrónico válido.'
   }),
-  role: z.enum([UserRole.ADMIN, UserRole.USER]),
+  role: z.enum([UserRole.ADMIN, UserRole.TEACHER, UserRole.STUDENT]),
   isTwoFactorEnabled: z.boolean()
 });
 

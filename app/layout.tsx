@@ -45,7 +45,7 @@ export default async function RootLayout({
 
   return (
     <SessionProvider session={session}>
-      <html lang='en' suppressHydrationWarning>
+      <html lang='es' suppressHydrationWarning>
         <body className={cn('relative', inter.className)}>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
             <div className='w-full flex justify-end pt-4 pr-4'>

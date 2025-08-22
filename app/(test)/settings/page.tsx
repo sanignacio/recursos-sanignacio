@@ -10,7 +10,7 @@ export default async function SettingsPage() {
 
   return (
     <>
-      <h2 className='text-xl md:text-3xl font-bold tracking-tight pb-4 flex items-center'>
+      <h2 className='text-xl md:text-3xl font-bold tracking-tight pb-4 flex items-center justify-center'>
         <UserCog className='mr-2 w-6 md:w-8 h-auto' />
         Configuración
       </h2>

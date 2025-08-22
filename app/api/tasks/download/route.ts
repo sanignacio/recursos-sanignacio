@@ -13,11 +13,8 @@ export async function GET(req: NextRequest) {
   const taskId = req.nextUrl.searchParams.get("taskId");
   const fileName = req.nextUrl.searchParams.get("fileName");
 
-  if (!userId || !taskId || !fileName) {
-    return NextResponse.json({ error: "Faltan parámetros" }, { status: 400 });
-  }
+  if (!userId || !taskId || !fileName) return NextResponse.json({ error: "Faltan parámetros" }, { status: 400 });
 
-  // Validación: admins pueden descargar cualquier archivo, usuarios normales solo los suyos
   if (session.role !== "ADMIN" && session.id.toString() !== userId) {
     return NextResponse.json({ error: "No autorizado" }, { status: 403 });
   }

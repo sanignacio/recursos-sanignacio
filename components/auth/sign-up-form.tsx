@@ -21,6 +21,8 @@ import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
 import { CardWrapper } from '@/components/auth/card-wrapper';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { UserRole } from '@prisma/client';
 
 export function SignUpForm() {
   const [isPending, startTransition] = useTransition();
@@ -33,7 +35,8 @@ export function SignUpForm() {
       email: '',
       password: '',
       confirm: '',
-      name: ''
+      name: '',
+      role: 'STUDENT'
     }
   });
 
@@ -131,6 +134,32 @@ export function SignUpForm() {
                         placeholder='••••••••'
                         type='password'
                       />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='role'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Rol</FormLabel>
+                    <FormControl>
+                      <Select
+                        disabled={isPending}
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder='Seleccionar rol' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value={UserRole.STUDENT}>Alumno</SelectItem>
+                          <SelectItem value={UserRole.TEACHER}>Profesor</SelectItem>
+                          <SelectItem value={UserRole.ADMIN}>Administrador</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

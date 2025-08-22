@@ -47,7 +47,7 @@ export default function UpdateProfileForm() {
     defaultValues: {
       name: user?.name || '',
       email: user?.tempEmail ? user.tempEmail : user?.email ? user.email : '',
-      role: user?.role || 'USER',
+      role: user?.role || 'STUDENT',
       isTwoFactorEnabled: user?.isTwoFactorEnabled || false
     }
   });
@@ -160,12 +160,13 @@ export default function UpdateProfileForm() {
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder='Select role' />
+                      <SelectValue placeholder='Elegí un rol' />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value={UserRole.ADMIN}>Admin</SelectItem>
-                    <SelectItem value={UserRole.USER}>User</SelectItem>
+                    <SelectItem value={UserRole.ADMIN}>Administrador</SelectItem>
+                    <SelectItem value={UserRole.TEACHER}>Profesor</SelectItem>
+                    <SelectItem value={UserRole.STUDENT}>Alumno</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

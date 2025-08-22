@@ -18,7 +18,7 @@ export async function sendVerificationEmail(
   await resend.emails.send({
     from: 'San Ignacio Recursos <confirmation@recursos.sanignacio.edu.uy>',
     to: [email],
-    subject: 'Verificacion de Email',
+    subject: 'Verificación de Email',
     react: EmailVerification({ name, verifyLink })
   });
 }
@@ -46,7 +46,7 @@ export async function sendTwoFactorTokenEmail(
   await resend.emails.send({
     from: 'San Ignacio Recursos <2fa@recursos.sanignacio.edu.uy>',
     to: [email],
-    subject: 'Codigo de Autenticacion de Dos Factores',
+    subject: 'Código de Autenticación de Dos Factores',
     react: TwoFactorAuthentication({ name, token })
   });
 }

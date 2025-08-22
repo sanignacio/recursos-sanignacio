@@ -1,7 +1,7 @@
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/protected/navbar';
 
-export default function ProtectedLayout({
+export default function TestLayout({
   children
 }: {
   children: React.ReactNode;

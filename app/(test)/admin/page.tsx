@@ -35,7 +35,7 @@ export default function AdminPage() {
 
   return (
     <div className='flex flex-col'>
-      <h2 className='text-xl md:text-3xl font-bold tracking-tight pb-4 flex items-center'>
+      <h2 className='text-xl md:text-3xl font-bold tracking-tight pb-4 flex items-center justify-center'>
         <Lock className='mr-2 w-6 md:w-8 h-auto' />
         Administrador
       </h2>
