@@ -26,7 +26,7 @@ export async function signUp(values: z.infer<typeof SignUpSchema>) {
 
   const { email, password, name, role } = validatedFields.data
 
-  const saltRounds = 10
+  const saltRounds = 10 // More = secure but slower, A LOT SLOWER
   const salt = await bcrypt.genSalt(saltRounds)
   const hashedPassword = await bcrypt.hash(password, salt)
 
@@ -51,8 +51,8 @@ export async function signUp(values: z.infer<typeof SignUpSchema>) {
 
   const verificationToken = await generateVerificationToken(newUser.id)
 
-  //const verifyLink = `http://localhost:3000/auth/email-verification?token=${verificationToken.token}`;
-  //console.log(`Verification link: ${verifyLink}`);
+  // const verifyLink = `http://localhost:3000/auth/email-verification?token=${verificationToken.token}`;
+  // console.log(`Verification link: ${verifyLink}`);
 
   await sendVerificationEmail(
     newUser.name,
