@@ -1,39 +1,30 @@
-import NextAuth from 'next-auth';
-import { UserRole } from '@prisma/client';
-import { PrismaAdapter } from '@auth/prisma-adapter';
+import NextAuth, { type NextAuthConfig, type User, type Session, type Account } from "next-auth";
+import { UserRole } from "@prisma/client";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 
-import { db } from '@/lib/db';
-import authConfig from '&/auth.config';
-import { getUserById } from '@/data/user';
-import { getAccountByUserId } from '@/data/account';
-import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation';
+import { db } from "@/lib/db";
+import authConfig from "&/auth.config";
+import { getUserById } from "@/data/user";
+import { getAccountByUserId } from "@/data/account";
+import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut
-} = NextAuth({
+const authOptions: NextAuthConfig = {
   pages: {
-    signIn: '/auth/sign-in',
-    error: '/auth/error'
+    signIn: "/auth/sign-in",
+    error: "/auth/error",
   },
   events: {
     async linkAccount({ user }) {
       await db.user.update({
-        where: {
-          id: user.id
-        },
-        data: {
-          emailVerified: new Date()
-        }
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
       });
-    }
+    },
   },
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account }: { user: User; account?: Account | null }) {
       // Skip email verification check for OAuth
-      if (account?.provider !== 'credentials') {
+      if (account?.provider !== "credentials") {
         return true;
       }
 
@@ -46,9 +37,7 @@ export const {
 
       // Check if 2FA enabled
       if (existingUser.isTwoFactorEnabled) {
-        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
-          existingUser.id
-        );
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id);
 
         // Prevent unconfirmed 2FA sign in
         if (!twoFactorConfirmation) {
@@ -57,9 +46,7 @@ export const {
 
         // Delete 2FA confirmation for next sign in
         await db.twoFactorConfirmation.delete({
-          where: {
-            id: twoFactorConfirmation.id
-          }
+          where: { id: twoFactorConfirmation.id },
         });
       }
 
@@ -76,9 +63,6 @@ export const {
 
       if (session.user) {
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
-      }
-
-      if (session.user) {
         session.user.name = token.name;
         session.user.email = token.email as string;
         session.user.tempEmail = token.tempEmail as string | null;
@@ -88,15 +72,10 @@ export const {
       return session;
     },
     async jwt({ token }) {
-      if (!token.sub) {
-        return token;
-      }
+      if (!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);
-
-      if (!existingUser) {
-        return token;
-      }
+      if (!existingUser) return token;
 
       const existingAccount = await getAccountByUserId(existingUser.id);
 
@@ -108,9 +87,13 @@ export const {
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
       return token;
-    }
+    },
   },
   adapter: PrismaAdapter(db),
-  session: { strategy: 'jwt' },
-  ...authConfig
-});
+  session: { strategy: "jwt" },
+  ...authConfig,
+};
+
+export const { auth, signIn, signOut, handlers } = NextAuth(authOptions);
+
+export const { GET, POST } = handlers;

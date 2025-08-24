@@ -41,15 +41,15 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   const session = await auth();
 
   return (
     <SessionProvider session={session}>
       <html lang='es' suppressHydrationWarning>
-        <body className={cn('relative', inter.className)}>
+        <body className={cn('relative', inter.className)} suppressHydrationWarning>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
             <div className='w-full flex justify-end pt-4 pr-4'>
               <ModeToggle />
