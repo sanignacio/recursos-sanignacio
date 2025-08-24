@@ -84,11 +84,7 @@ export function ForgotPasswordForm() {
                 Enviando correo electrónico...
               </>
             )}
-            {!isPending && (
-              <>
-                Enlace de restablecimiento de contraseña de correo electrónico
-              </>
-            )}
+            {!isPending && (<>Enviar enlace de restablecimiento</>)}
           </Button>
         </form>
       </Form>

@@ -13,7 +13,7 @@ export default function GlobalError() {
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <main className='bg-background flex h-full min-h-screen flex-col items-center justify-center'>
             <section className='space-y-8 pt-6 pb-8 md:pt-10 md:pb-12'>
-              <div className='container flex max-w-[64rem] flex-col items-center gap-6 text-center'>
+              <div className='container flex max-w-5xl flex-col items-center gap-6 text-center'>
                 <div className='mb-4 flex items-center'>
                   <ShieldCheck
                     strokeWidth={2.5}
@@ -33,7 +33,7 @@ export default function GlobalError() {
                   </h2>
                 </div>
 
-                <p className='text-muted-foreground max-w-[42rem] text-lg leading-normal md:text-xl'>
+                <p className='text-muted-foreground max-w-2xl text-lg leading-normal md:text-xl'>
                   Ha ocurrido un error inesperado. Puedes intentar recargar la
                   página o regresar al inicio.
                 </p>

@@ -7,7 +7,7 @@ export default function ProtectedLayout({
 }>) {
   return (
     <>
-      <div className='flex h-full min-h-[calc(100vh_-_36px_-_48px)] w-full flex-col items-center justify-center gap-y-10 px-4 py-10'>
+      <div className='flex h-full min-h-[calc(100vh-36px-48px)] w-full flex-col items-center justify-center gap-y-10 px-4 py-10'>
         {children}
       </div>
       <Footer />

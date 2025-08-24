@@ -74,7 +74,7 @@ export default function TasksComponent() {
 
         <div className='space-y-6'>
           {tasks.map(task => (
-            <Card key={task.taskId} className='min-w-[500px] shadow-sm'>
+            <Card key={task.taskId} className='min-w-[500px] shadow-xs'>
               <CardHeader>
                 <div className='flex flex-col items-center font-semibold'>
                   <p>Usuario: {task.userId}</p>

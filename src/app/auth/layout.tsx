@@ -7,7 +7,7 @@ export default function AuthLayout({
 }>) {
   return (
     <>
-      <div className='flex h-full min-h-[calc(100vh_-_36px_-_48px)] items-center justify-center px-4 md:px-0'>
+      <div className='flex h-full min-h-[calc(100vh-36px-48px)] items-center justify-center px-4 md:px-0'>
         {children}
       </div>
       <Footer />

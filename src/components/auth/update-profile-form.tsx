@@ -181,7 +181,7 @@ export default function UpdateProfileForm() {
               control={form.control}
               name='isTwoFactorEnabled'
               render={({ field }) => (
-                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
+                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-xs'>
                   <div className='space-y-0.5'>
                     <FormLabel>Autenticación de dos factores</FormLabel>
                     <FormDescription>
@@ -209,7 +209,7 @@ export default function UpdateProfileForm() {
               Guardando...
             </>
           )}
-          {!isPending && <>Guardando</>}
+          {!isPending && <>Guardar</>}
         </Button>
       </form>
     </Form>

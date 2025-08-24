@@ -61,10 +61,10 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
   const getFileIcon = (file: File) => {
     if (file.type === 'application/pdf') {
       return (
-        <FileText className='text-muted-foreground h-4 w-4 flex-shrink-0' />
+        <FileText className='text-muted-foreground h-4 w-4 shrink-0' />
       )
     }
-    return <ImageIcon className='text-muted-foreground h-4 w-4 flex-shrink-0' />
+    return <ImageIcon className='text-muted-foreground h-4 w-4 shrink-0' />
   }
 
   return (

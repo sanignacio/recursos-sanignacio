@@ -14,7 +14,7 @@ export default function Error({ error, reset }: ErrorProps) {
   return (
     <main className='bg-background flex h-full min-h-screen flex-col items-center justify-center'>
       <section className='space-y-8 pt-6 pb-8 md:pt-10 md:pb-12'>
-        <div className='container flex max-w-[64rem] flex-col items-center gap-6 text-center'>
+        <div className='container flex max-w-5xl flex-col items-center gap-6 text-center'>
           <div className='mb-4 flex items-center'>
             <ShieldCheck
               strokeWidth={2.5}
@@ -34,7 +34,7 @@ export default function Error({ error, reset }: ErrorProps) {
             </h2>
           </div>
 
-          <p className='text-muted-foreground max-w-[42rem] text-lg leading-normal md:text-xl'>
+          <p className='text-muted-foreground max-w-2xl text-lg leading-normal md:text-xl'>
             Ha ocurrido un error inesperado. Nuestro equipo ha sido notificado y
             está trabajando para solucionarlo. Puedes intentar recargar la
             página o regresar al inicio.
@@ -55,7 +55,7 @@ export default function Error({ error, reset }: ErrorProps) {
           </div>
 
           {process.env.NODE_ENV === 'development' && (
-            <div className='bg-muted mt-6 max-w-[42rem] rounded-lg p-4 text-left'>
+            <div className='bg-muted mt-6 max-w-2xl rounded-lg p-4 text-left'>
               <div className='mb-2 flex items-center'>
                 <AlertTriangle className='mr-2 h-4 w-4 text-red-500' />
                 <span className='text-sm font-semibold text-red-500'>
