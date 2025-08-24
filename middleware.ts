@@ -5,8 +5,8 @@ import {
   publicRoutes,
   apiAuthPrefix,
   DEFAULT_SIGNIN_REDIRECT
-} from '@/routes';
-import authConfig from '@/auth.config';
+} from '&/routes';
+import authConfig from '&/auth.config';
 
 export const { auth } = NextAuth(authConfig);
 
