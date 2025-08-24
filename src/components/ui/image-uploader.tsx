@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import type React from "react"
+import type React from 'react'
 
-import { useRef, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Upload, X, ImageIcon, FileText } from "lucide-react"
+import { useRef, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Upload, X, ImageIcon, FileText } from 'lucide-react'
 
 interface ImageUploaderProps {
   onSubmit?: (files: File[]) => void
@@ -19,9 +19,10 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
     const files = event.target.files
     if (files) {
       const newFiles = Array.from(files).filter(
-        (file) => file.type.startsWith("image/") || file.type === "application/pdf",
+        file =>
+          file.type.startsWith('image/') || file.type === 'application/pdf',
       )
-      setSelectedFiles((prev) => [...prev, ...newFiles])
+      setSelectedFiles(prev => [...prev, ...newFiles])
     }
   }
 
@@ -31,7 +32,7 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
 
     if (inputRef.current) {
       const dt = new DataTransfer()
-      newFiles.forEach((file) => dt.items.add(file))
+      newFiles.forEach(file => dt.items.add(file))
       inputRef.current.files = dt.files
     }
   }
@@ -41,71 +42,89 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
     if (onSubmit) {
       onSubmit(selectedFiles)
     } else {
-      console.log("Selected files:", selectedFiles)
+      console.log('Selected files:', selectedFiles)
     }
     setSelectedFiles([])
-    if (inputRef.current) inputRef.current.value = "" 
+    if (inputRef.current) inputRef.current.value = ''
   }
 
   const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return "0 Bytes"
+    if (bytes === 0) return '0 Bytes'
     const k = 1024
-    const sizes = ["Bytes", "KB", "MB", "GB"]
+    const sizes = ['Bytes', 'KB', 'MB', 'GB']
     const i = Math.floor(Math.log(bytes) / Math.log(k))
-    return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
+    return (
+      Number.parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+    )
   }
 
   const getFileIcon = (file: File) => {
-    if (file.type === "application/pdf") {
-      return <FileText className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+    if (file.type === 'application/pdf') {
+      return (
+        <FileText className='text-muted-foreground h-4 w-4 flex-shrink-0' />
+      )
     }
-    return <ImageIcon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+    return <ImageIcon className='text-muted-foreground h-4 w-4 flex-shrink-0' />
   }
 
   return (
-    <Card className="max-w-xl mx-auto min-w-[500px]">
-      <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <Card className='mx-auto max-w-xl min-w-[500px]'>
+      <CardContent className='p-6'>
+        <form onSubmit={handleSubmit} className='space-y-4'>
           {/* File Input Area */}
-          <div className="border-2 border-dashed border-border rounded-lg text-center hover:border-primary/50 transition-colors">
+          <div className='border-border hover:border-primary/50 rounded-lg border-2 border-dashed text-center transition-colors'>
             <input
               ref={inputRef}
-              type="file"
-              id="file-upload"
+              type='file'
+              id='file-upload'
               multiple
-              accept="image/*,application/pdf"
+              accept='image/*,application/pdf'
               onChange={handleFileSelect}
-              className="hidden"
+              className='hidden'
             />
-            <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center gap-2 p-8">
-              <Upload className="h-8 w-8 text-muted-foreground" />
-              <div className="text-sm text-muted-foreground">
-                <span className="font-medium text-primary">Haz clic para subir</span> o arrastra y suelta
+            <label
+              htmlFor='file-upload'
+              className='flex cursor-pointer flex-col items-center gap-2 p-8'
+            >
+              <Upload className='text-muted-foreground h-8 w-8' />
+              <div className='text-muted-foreground text-sm'>
+                <span className='text-primary font-medium'>
+                  Haz clic para subir
+                </span>{' '}
+                o arrastra y suelta
               </div>
-              <div className="text-xs text-muted-foreground">Imágenes (PNG, JPG, GIF) y PDFs hasta 10MB</div>
+              <div className='text-muted-foreground text-xs'>
+                Imágenes (PNG, JPG, GIF) y PDFs hasta 10MB
+              </div>
             </label>
           </div>
 
           {/* Selected Files List */}
           {selectedFiles.length > 0 && (
-            <div className="space-y-2">
-              <h3 className="text-sm font-medium">Archivos Seleccionados ({selectedFiles.length})</h3>
-              <div className="space-y-2 max-h-48 overflow-y-auto">
+            <div className='space-y-2'>
+              <h3 className='text-sm font-medium'>
+                Archivos Seleccionados ({selectedFiles.length})
+              </h3>
+              <div className='max-h-48 space-y-2 overflow-y-auto'>
                 {selectedFiles.map((file, index) => (
-                  <Card key={index} className="flex items-center gap-3 p-2">
+                  <Card key={index} className='flex items-center gap-3 p-2'>
                     {getFileIcon(file)}
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-medium truncate">{file.name}</div>
-                      <div className="text-xs text-muted-foreground">{formatFileSize(file.size)}</div>
+                    <div className='min-w-0 flex-1'>
+                      <div className='truncate text-sm font-medium'>
+                        {file.name}
+                      </div>
+                      <div className='text-muted-foreground text-xs'>
+                        {formatFileSize(file.size)}
+                      </div>
                     </div>
                     <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
+                      type='button'
+                      variant='ghost'
+                      size='sm'
                       onClick={() => removeFile(index)}
-                      className="h-6 w-6 p-0 hover:bg-destructive/10"
+                      className='hover:bg-destructive/10 h-6 w-6 p-0'
                     >
-                      <X className="h-3 w-3" />
+                      <X className='h-3 w-3' />
                     </Button>
                   </Card>
                 ))}
@@ -114,7 +133,11 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
           )}
 
           {/* Submit Button */}
-          <Button type="submit" className="w-full" disabled={selectedFiles.length === 0}>
+          <Button
+            type='submit'
+            className='w-full'
+            disabled={selectedFiles.length === 0}
+          >
             Enviar Archivos ({selectedFiles.length})
           </Button>
         </form>

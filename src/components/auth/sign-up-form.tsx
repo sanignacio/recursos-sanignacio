@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import * as z from 'zod';
-import { Loader2 } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { useState, useTransition } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod'
+import { Loader2 } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import { useState, useTransition } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
   Form,
@@ -12,22 +12,28 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from '@/components/ui/form';
-import { SignUpSchema } from '@/schemas';
-import { signUp } from '@/actions/sign-up';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
-import { CardWrapper } from '@/components/auth/card-wrapper';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { UserRole } from '@prisma/client';
+  FormMessage,
+} from '@/components/ui/form'
+import { SignUpSchema } from '@/schemas'
+import { signUp } from '@/actions/sign-up'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { FormError } from '@/components/form-error'
+import { FormSuccess } from '@/components/form-success'
+import { CardWrapper } from '@/components/auth/card-wrapper'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { UserRole } from '@prisma/client'
 
 export function SignUpForm() {
-  const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
+  const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | undefined>('')
+  const [success, setSuccess] = useState<string | undefined>('')
 
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -36,21 +42,21 @@ export function SignUpForm() {
       password: '',
       confirm: '',
       name: '',
-      role: 'STUDENT'
-    }
-  });
+      role: 'STUDENT',
+    },
+  })
 
   const onSubmit = (values: z.infer<typeof SignUpSchema>) => {
-    setError('');
-    setSuccess('');
+    setError('')
+    setSuccess('')
 
     startTransition(() => {
-      signUp(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-      });
-    });
-  };
+      signUp(values).then(data => {
+        setError(data.error)
+        setSuccess(data.success)
+      })
+    })
+  }
 
   return (
     <CardWrapper
@@ -155,9 +161,15 @@ export function SignUpForm() {
                           <SelectValue placeholder='Seleccionar rol' />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value={UserRole.STUDENT}>Alumno</SelectItem>
-                          <SelectItem value={UserRole.TEACHER}>Profesor</SelectItem>
-                          <SelectItem value={UserRole.ADMIN}>Administrador</SelectItem>
+                          <SelectItem value={UserRole.STUDENT}>
+                            Alumno
+                          </SelectItem>
+                          <SelectItem value={UserRole.TEACHER}>
+                            Profesor
+                          </SelectItem>
+                          <SelectItem value={UserRole.ADMIN}>
+                            Administrador
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
@@ -170,7 +182,7 @@ export function SignUpForm() {
             <Button disabled={isPending} type='submit' className='w-full'>
               {isPending && (
                 <>
-                  <Loader2 className='animate-spin mr-2' size={18} />
+                  <Loader2 className='mr-2 animate-spin' size={18} />
                   Creando...
                 </>
               )}
@@ -180,5 +192,5 @@ export function SignUpForm() {
         </Form>
       )}
     </CardWrapper>
-  );
+  )
 }

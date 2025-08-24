@@ -1,10 +1,9 @@
-
 ![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
 
 # 📚 Recursos San Ignacio
 
 Recursos San Ignacio es una web que permite solicitar impresiones y laptops desde el celular. Los administradores pueden preparar las solicitudes para que los materiales estén listos al retirarlos.
+
 ## 🚀 Despliegue
 
 Para ejecutar este proyecto ejecute
@@ -13,6 +12,7 @@ Para ejecutar este proyecto ejecute
   pnpm run build
   pnpm start
 ```
+
 ## ⚙️ Funciones
 
 - Modo Claro/Oscuro
@@ -20,6 +20,7 @@ Para ejecutar este proyecto ejecute
 - Enviar archivos para imprimir y guardar
 - Los administradores pueden ver la lista de tareas, descargar archivos para imprimir y marcarlos como completados.
 - Enviar correos electrónicos para restablecer contraseñas, autenticación de dos factores (A2FA) y verificación de correo electrónico.
+
 ## 🏠 Ejecutar localmente
 
 Clonar el proyecto
@@ -45,7 +46,6 @@ Iniciar el servidor
 ```bash
   pnpm start
 ```
-
 
 ## 🛠️ Herramientas usadas
 
@@ -78,6 +78,7 @@ Para ejecutar este proyecto, deberá agregar las siguientes variables de entorno
 `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
 
 `RESEND_API_KEY`
+
 ## 📚 Referencia de la API
 
 #### Envía un código 200 si eres administrador, de lo contrario envía un 403
@@ -102,11 +103,11 @@ GET /api/tasks
 POST /api/tasks
 ```
 
-| Parámetro | Tipo | Descripción | Dónde |
-| :-------- | :--- | :---------- | :---- |
-| `taskId` | `string` | **Opcional**. Sobrescribe el valor aleatorio de la tarea. | URL |
-| `file(s)` | `File` | **Requerido**. Archivo(s) a subir. | BODY |
-| `engrampado-<archivo>` | `string` | **Opcional**. `"true"` o `"false"`. Indica si el archivo debe estar engrampado. | BODY |
+| Parámetro              | Tipo     | Descripción                                                                     | Dónde |
+| :--------------------- | :------- | :------------------------------------------------------------------------------ | :---- |
+| `taskId`               | `string` | **Opcional**. Sobrescribe el valor aleatorio de la tarea.                       | URL   |
+| `file(s)`              | `File`   | **Requerido**. Archivo(s) a subir.                                              | BODY  |
+| `engrampado-<archivo>` | `string` | **Opcional**. `"true"` o `"false"`. Indica si el archivo debe estar engrampado. | BODY  |
 
 ---
 
@@ -116,10 +117,10 @@ POST /api/tasks
 DELETE /api/tasks
 ```
 
-| Parámetro | Tipo | Descripción | Dónde |
-| :-------- | :--- | :---------- | :---- |
-| `taskId` | `string` | **Requerido**. ID de la tarea a eliminar. | URL |
-| `userId` | `string` | **Opcional**. Si no se indica, se asume el ID del usuario que hace la petición. | URL |
+| Parámetro | Tipo     | Descripción                                                                     | Dónde |
+| :-------- | :------- | :------------------------------------------------------------------------------ | :---- |
+| `taskId`  | `string` | **Requerido**. ID de la tarea a eliminar.                                       | URL   |
+| `userId`  | `string` | **Opcional**. Si no se indica, se asume el ID del usuario que hace la petición. | URL   |
 
 ---
 
@@ -129,11 +130,11 @@ DELETE /api/tasks
 GET /api/tasks/download
 ```
 
-| Parámetro | Tipo | Descripción | Dónde |
-| :-------- | :--- | :---------- | :---- |
-| `userId` | `string` | **Requerido**. ID del usuario que subió la tarea. | URL |
-| `taskId` | `string` | **Requerido**. ID de la tarea a la que pertenece el archivo. | URL |
-| `fileName` | `string` | **Requerido**. Nombre exacto del archivo que se quiere descargar. | URL |
+| Parámetro  | Tipo     | Descripción                                                       | Dónde |
+| :--------- | :------- | :---------------------------------------------------------------- | :---- |
+| `userId`   | `string` | **Requerido**. ID del usuario que subió la tarea.                 | URL   |
+| `taskId`   | `string` | **Requerido**. ID de la tarea a la que pertenece el archivo.      | URL   |
+| `fileName` | `string` | **Requerido**. Nombre exacto del archivo que se quiere descargar. | URL   |
 
 ---
 
@@ -143,12 +144,11 @@ GET /api/tasks/download
 GET /api/items/${id}
 ```
 
-| Parámetro | Tipo | Descripción | Dónde |
-| :-------- | :--- | :---------- | :---- |
-| `id` | `string` | **Requerido**. ID del item a obtener. | URL |
+| Parámetro | Tipo     | Descripción                           | Dónde |
+| :-------- | :------- | :------------------------------------ | :---- |
+| `id`      | `string` | **Requerido**. ID del item a obtener. | URL   |
 
 ## 👥 Autores
 
 - [Martin](https://www.github.com/0-Sandy)
 - [Maximo](https://www.github.com/)
-

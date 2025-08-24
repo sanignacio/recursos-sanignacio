@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import * as z from 'zod';
-import { useForm } from 'react-hook-form';
-import { useState, useTransition } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod'
+import { useForm } from 'react-hook-form'
+import { useState, useTransition } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
   Form,
@@ -12,42 +12,42 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { ResetPasswordSchema } from '@/schemas';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
-import { resetPassword } from '@/actions/reset-password';
-import { CardWrapper } from '@/components/auth/card-wrapper';
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { ResetPasswordSchema } from '@/schemas'
+import { FormError } from '@/components/form-error'
+import { FormSuccess } from '@/components/form-success'
+import { resetPassword } from '@/actions/reset-password'
+import { CardWrapper } from '@/components/auth/card-wrapper'
 
 export function ResetPasswordForm() {
-  const searchParams = useSearchParams();
-  const token = searchParams.get('token');
+  const searchParams = useSearchParams()
+  const token = searchParams.get('token')
 
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
-  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>('')
+  const [success, setSuccess] = useState<string | undefined>('')
+  const [isPending, startTransition] = useTransition()
 
   const form = useForm<z.infer<typeof ResetPasswordSchema>>({
     resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
-      password: ''
-    }
-  });
+      password: '',
+    },
+  })
 
   const onSubmit = (values: z.infer<typeof ResetPasswordSchema>) => {
-    setError('');
-    setSuccess('');
+    setError('')
+    setSuccess('')
 
     startTransition(() => {
-      resetPassword(values, token).then((data) => {
-        setError(data?.error);
-        setSuccess(data?.success);
-      });
-    });
-  };
+      resetPassword(values, token).then(data => {
+        setError(data?.error)
+        setSuccess(data?.success)
+      })
+    })
+  }
 
   return (
     <CardWrapper
@@ -104,5 +104,5 @@ export function ResetPasswordForm() {
         </form>
       </Form>
     </CardWrapper>
-  );
+  )
 }

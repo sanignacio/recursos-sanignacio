@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { FaUser } from 'react-icons/fa';
+import Link from 'next/link'
+import { FaUser } from 'react-icons/fa'
 
 import {
   DropdownMenu,
@@ -8,15 +8,15 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { useCurrentUser } from '@/hooks/use-current-user';
-import { SignOutButton } from '@/components/auth/sign-out-button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { useCurrentUser } from '@/hooks/use-current-user'
+import { SignOutButton } from '@/components/auth/sign-out-button'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 export function UserButton() {
-  const user = useCurrentUser();
+  const user = useCurrentUser()
 
   return (
     <DropdownMenu>
@@ -33,10 +33,10 @@ export function UserButton() {
       <DropdownMenuContent className='w-56' align='end'>
         <DropdownMenuLabel className='font-normal'>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none truncate'>
+            <p className='truncate text-sm leading-none font-medium'>
               {user?.name}
             </p>
-            <p className='text-xs leading-none text-muted-foreground truncate'>
+            <p className='text-muted-foreground truncate text-xs leading-none'>
               {user?.email}
             </p>
           </div>
@@ -61,5 +61,5 @@ export function UserButton() {
         </SignOutButton>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

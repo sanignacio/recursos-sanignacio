@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import * as z from 'zod';
-import Link from 'next/link';
-import { Loader2 } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { useState, useTransition } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod'
+import Link from 'next/link'
+import { Loader2 } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import { useState, useTransition } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
   Form,
@@ -14,68 +14,68 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from '@/components/ui/form';
-import { SignInSchema } from '@/schemas';
-import { signIn } from '@/actions/sign-in';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
-import { CardWrapper } from '@/components/auth/card-wrapper';
+  FormMessage,
+} from '@/components/ui/form'
+import { SignInSchema } from '@/schemas'
+import { signIn } from '@/actions/sign-in'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { FormError } from '@/components/form-error'
+import { FormSuccess } from '@/components/form-success'
+import { CardWrapper } from '@/components/auth/card-wrapper'
 
 export function SignInForm() {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl');
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')
   const urlError =
     searchParams.get('error') === 'OAuthAccountNotLinked'
       ? 'Email already in use with different provider.'
-      : '';
+      : ''
 
-  const [isPending, startTransition] = useTransition();
-  const [showTwoFactor, setShowTwoFactor] = useState(false);
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
+  const [isPending, startTransition] = useTransition()
+  const [showTwoFactor, setShowTwoFactor] = useState(false)
+  const [error, setError] = useState<string | undefined>('')
+  const [success, setSuccess] = useState<string | undefined>('')
 
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
     defaultValues: {
       email: '',
-      password: ''
-    }
-  });
+      password: '',
+    },
+  })
 
   const onSubmit = (values: z.infer<typeof SignInSchema>) => {
-    setError('');
-    setSuccess('');
+    setError('')
+    setSuccess('')
 
     startTransition(() => {
       signIn(values, callbackUrl)
-        .then((data) => {
+        .then(data => {
           if (data?.error) {
-            form.reset();
-            setError(data.error);
+            form.reset()
+            setError(data.error)
           }
 
           if (data?.success) {
-            form.reset();
-            setSuccess(data.success);
+            form.reset()
+            setSuccess(data.success)
           }
 
           if (data?.twoFactor) {
-            setShowTwoFactor(true);
+            setShowTwoFactor(true)
           }
         })
-        .catch(() => setError('¡Ups! Algo salió mal.'));
-    });
-  };
+        .catch(() => setError('¡Ups! Algo salió mal.'))
+    })
+  }
 
   return (
     <CardWrapper
       headerLabel='Inicia sesión en tu cuenta'
       footerLabel='Regístrate'
       footerHref='/auth/sign-up'
-      footerDesc="¿Aún no tienes una cuenta?"
+      footerDesc='¿Aún no tienes una cuenta?'
       showSocial={!showTwoFactor}
     >
       <Form {...form}>
@@ -88,7 +88,9 @@ export function SignInForm() {
                 name='code'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Código de autenticación de dos factores</FormLabel>
+                    <FormLabel>
+                      Código de autenticación de dos factores
+                    </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -161,7 +163,7 @@ export function SignInForm() {
           <Button disabled={isPending} type='submit' className='w-full'>
             {isPending && (
               <>
-                <Loader2 className='animate-spin mr-2' size={18} />
+                <Loader2 className='mr-2 animate-spin' size={18} />
                 {showTwoFactor ? 'Confirming...' : 'Signing in...'}
               </>
             )}
@@ -170,5 +172,5 @@ export function SignInForm() {
         </form>
       </Form>
     </CardWrapper>
-  );
+  )
 }

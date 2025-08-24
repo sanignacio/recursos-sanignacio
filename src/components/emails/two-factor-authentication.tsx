@@ -9,19 +9,19 @@ import {
   Preview,
   Section,
   Tailwind,
-  Text
-} from '@react-email/components';
+  Text,
+} from '@react-email/components'
 
-const baseUrl = process.env.AUTH_URL;
+const baseUrl = process.env.AUTH_URL
 
 interface TwoFactorAuthenticationProps {
-  name: string | null;
-  token: string;
+  name: string | null
+  token: string
 }
 
 export function TwoFactorAuthentication({
   name,
-  token
+  token,
 }: TwoFactorAuthenticationProps) {
   return (
     <Html>
@@ -32,8 +32,8 @@ export function TwoFactorAuthentication({
         Ingrese el siguiente código para terminar de iniciar sesión en su cuenta
       </Preview>
       <Tailwind>
-        <Body className='bg-white text-gray-900 font-sans'>
-          <Container className='max-w-[480px] my-0 mx-auto pt-5 pb-12 px-0'>
+        <Body className='bg-white font-sans text-gray-900'>
+          <Container className='mx-auto my-0 max-w-[480px] px-0 pt-5 pb-12'>
             <Link href={baseUrl} className='flex items-center text-gray-800'>
               <Img
                 src={`${baseUrl}/shield-check.png`}
@@ -42,52 +42,53 @@ export function TwoFactorAuthentication({
                 className='mr-1 -ml-1'
                 alt='Auth'
               />
-              <Heading as='h1' className='text-3xl font-bold m-0'>
+              <Heading as='h1' className='m-0 text-3xl font-bold'>
                 Auth
               </Heading>
             </Link>
 
             <Text className='text-xl'>
               Hola <strong>{typeof name === 'string' ? name : 'User'}</strong>,
-              continua iniciando sesión en su cuenta ingresando el siguiente código.
+              continua iniciando sesión en su cuenta ingresando el siguiente
+              código.
             </Text>
 
-            <Section className='p-6 border-solid border border-gray-300 rounded-md text-center'>
+            <Section className='rounded-md border border-solid border-gray-300 p-6 text-center'>
               <Text className='m-0 mb-3 text-left'>
                 ¡Saludos de <strong>Recursos San Ignacio</strong>!
               </Text>
               <Text className='m-0 mb-3 text-left'>
                 Alguien intentó iniciar sesión recientemente en su cuenta de
-                Recursos San Ignacio. Si fue usted, utilice el código a continuación
-                para continuar con el registro.
+                Recursos San Ignacio. Si fue usted, utilice el código a
+                continuación para continuar con el registro.
               </Text>
 
-              <Text className='inline-flex py-2 px-5 bg-zinc-100 rounded text-center font-bold text-xl'>
+              <Text className='inline-flex rounded bg-zinc-100 px-5 py-2 text-center text-xl font-bold'>
                 {token}
               </Text>
             </Section>
 
-            <Text className="text-gray-500 text-xs text-center mt-5">
+            <Text className='mt-5 text-center text-xs text-gray-500'>
               <Link
-                href="https://github.com/salimi-my/next-auth-starter"
-                className="text-gray-500 font-semibold"
+                href='https://github.com/salimi-my/next-auth-starter'
+                className='font-semibold text-gray-500'
               >
                 Recursos San Ignacio
               </Link>
               ・ Creado por{' '}
               <Link
-                href="https://www.github.com/0-Sandy"
-                className="text-gray-500 underline underline-offset-2 px-1"
-                target="_blank"
-                rel="noopener noreferrer"
+                href='https://www.github.com/0-Sandy'
+                className='px-1 text-gray-500 underline underline-offset-2'
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 Martin
               </Link>
               <Link
-                href="#"
-                className="text-gray-500 underline underline-offset-2 px-1"
-                target="_blank"
-                rel="noopener noreferrer"
+                href='#'
+                className='px-1 text-gray-500 underline underline-offset-2'
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 Máximo
               </Link>
@@ -96,5 +97,5 @@ export function TwoFactorAuthentication({
         </Body>
       </Tailwind>
     </Html>
-  );
+  )
 }

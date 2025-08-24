@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { Menu, ShieldCheck } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import Link from 'next/link'
+import { Menu, ShieldCheck } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuContent,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { UserButton } from '@/components/auth/user-button';
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { UserButton } from '@/components/auth/user-button'
 
 export function Navbar() {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   return (
-    <nav className='w-full h-16 border-b flex items-center px-4'>
-      <div className='md:hidden mr-2'>
+    <nav className='flex h-16 w-full items-center border-b px-4'>
+      <div className='mr-2 md:hidden'>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='outline' size='icon'>
@@ -43,17 +43,17 @@ export function Navbar() {
         </DropdownMenu>
       </div>
 
-      <Link href='/server' className='flex items-center mr-8'>
-        <ShieldCheck strokeWidth={2.5} className='mr-1 w-8 h-auto' />
+      <Link href='/server' className='mr-8 flex items-center'>
+        <ShieldCheck strokeWidth={2.5} className='mr-1 h-auto w-8' />
         <h2 className='text-sm font-bold'>Recursos San Ignacio</h2>
       </Link>
 
-      <div className='hidden md:flex items-center space-x-6'>
+      <div className='hidden items-center space-x-6 md:flex'>
         <Link
           href='/server'
           className={cn(
-            'text-sm font-semibold transition-colors hover:text-primary',
-            pathname !== '/server' && 'text-muted-foreground'
+            'hover:text-primary text-sm font-semibold transition-colors',
+            pathname !== '/server' && 'text-muted-foreground',
           )}
         >
           Servidor
@@ -61,8 +61,8 @@ export function Navbar() {
         <Link
           href='/client'
           className={cn(
-            'text-sm font-semibold transition-colors hover:text-primary',
-            pathname !== '/client' && 'text-muted-foreground'
+            'hover:text-primary text-sm font-semibold transition-colors',
+            pathname !== '/client' && 'text-muted-foreground',
           )}
         >
           Cliente
@@ -70,8 +70,8 @@ export function Navbar() {
         <Link
           href='/admin'
           className={cn(
-            'text-sm font-semibold transition-colors hover:text-primary',
-            pathname !== '/admin' && 'text-muted-foreground'
+            'hover:text-primary text-sm font-semibold transition-colors',
+            pathname !== '/admin' && 'text-muted-foreground',
           )}
         >
           Administrador
@@ -79,8 +79,8 @@ export function Navbar() {
         <Link
           href='/settings'
           className={cn(
-            'text-sm font-semibold transition-colors hover:text-primary',
-            pathname !== '/settings' && 'text-muted-foreground'
+            'hover:text-primary text-sm font-semibold transition-colors',
+            pathname !== '/settings' && 'text-muted-foreground',
           )}
         >
           Configuración
@@ -91,5 +91,5 @@ export function Navbar() {
         <UserButton />
       </div>
     </nav>
-  );
+  )
 }

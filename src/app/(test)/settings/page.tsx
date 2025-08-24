@@ -1,21 +1,21 @@
-import { UserCog } from 'lucide-react';
+import { UserCog } from 'lucide-react'
 
-import { currentUser } from '@/lib/authentication';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import UpdateProfileForm from '@/components/auth/update-profile-form';
-import UpdatePasswordForm from '@/components/auth/update-password-form';
+import { currentUser } from '@/lib/authentication'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import UpdateProfileForm from '@/components/auth/update-profile-form'
+import UpdatePasswordForm from '@/components/auth/update-password-form'
 
 export const metadata = {
   title: 'Configuración',
 }
 
 export default async function SettingsPage() {
-  const user = await currentUser();
+  const user = await currentUser()
 
   return (
     <>
-      <h2 className='text-xl md:text-3xl font-bold tracking-tight pb-4 flex items-center justify-center'>
-        <UserCog className='mr-2 w-6 md:w-8 h-auto' />
+      <h2 className='flex items-center justify-center pb-4 text-xl font-bold tracking-tight md:text-3xl'>
+        <UserCog className='mr-2 h-auto w-6 md:w-8' />
         Configuración
       </h2>
       <Card className='w-full'>
@@ -27,7 +27,7 @@ export default async function SettingsPage() {
         </CardContent>
       </Card>
       {user?.isOAuth === false && (
-        <Card className='w-full mt-6'>
+        <Card className='mt-6 w-full'>
           <CardHeader>
             <h3 className='font-semibold'>Actualizar contraseña</h3>
           </CardHeader>
@@ -37,5 +37,5 @@ export default async function SettingsPage() {
         </Card>
       )}
     </>
-  );
+  )
 }

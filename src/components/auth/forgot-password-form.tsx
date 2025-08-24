@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
-import * as z from 'zod';
-import { Loader2 } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { useState, useTransition } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod'
+import { Loader2 } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import { useState, useTransition } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
   Form,
@@ -12,39 +12,39 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { ForgotPasswordSchema } from '@/schemas';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
-import { forgotPassword } from '@/actions/forgot-password';
-import { CardWrapper } from '@/components/auth/card-wrapper';
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { ForgotPasswordSchema } from '@/schemas'
+import { FormError } from '@/components/form-error'
+import { FormSuccess } from '@/components/form-success'
+import { forgotPassword } from '@/actions/forgot-password'
+import { CardWrapper } from '@/components/auth/card-wrapper'
 
 export function ForgotPasswordForm() {
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
-  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>('')
+  const [success, setSuccess] = useState<string | undefined>('')
+  const [isPending, startTransition] = useTransition()
 
   const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
     resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
-      email: ''
-    }
-  });
+      email: '',
+    },
+  })
 
   const onSubmit = (values: z.infer<typeof ForgotPasswordSchema>) => {
-    setError('');
-    setSuccess('');
+    setError('')
+    setSuccess('')
 
     startTransition(() => {
-      forgotPassword(values).then((data) => {
-        setError(data?.error);
-        setSuccess(data?.success);
-      });
-    });
-  };
+      forgotPassword(values).then(data => {
+        setError(data?.error)
+        setSuccess(data?.success)
+      })
+    })
+  }
 
   return (
     <CardWrapper
@@ -80,14 +80,18 @@ export function ForgotPasswordForm() {
           <Button disabled={isPending} type='submit' className='w-full'>
             {isPending && (
               <>
-                <Loader2 className='animate-spin mr-2' size={18} />
+                <Loader2 className='mr-2 animate-spin' size={18} />
                 Enviando correo electrónico...
               </>
             )}
-            {!isPending && <>Enlace de restablecimiento de contraseña de correo electrónico</>}
+            {!isPending && (
+              <>
+                Enlace de restablecimiento de contraseña de correo electrónico
+              </>
+            )}
           </Button>
         </form>
       </Form>
     </CardWrapper>
-  );
+  )
 }

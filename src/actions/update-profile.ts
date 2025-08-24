@@ -1,62 +1,62 @@
-'use server';
+'use server'
 
-import * as z from 'zod';
+import * as z from 'zod'
 
-import { db } from '@/lib/db';
-import { UpdateProfileSchema } from '@/schemas';
-import { sendVerificationEmail } from '@/lib/mail';
-import { currentUser } from '@/lib/authentication';
-import { generateVerificationToken } from '@/lib/tokens';
-import { getUserByEmail, getUserById } from '@/data/user';
+import { db } from '@/lib/db'
+import { UpdateProfileSchema } from '@/schemas'
+import { sendVerificationEmail } from '@/lib/mail'
+import { currentUser } from '@/lib/authentication'
+import { generateVerificationToken } from '@/lib/tokens'
+import { getUserByEmail, getUserById } from '@/data/user'
 
 export async function updateProfile(
-  values: z.infer<typeof UpdateProfileSchema>
+  values: z.infer<typeof UpdateProfileSchema>,
 ) {
-  const user = await currentUser();
+  const user = await currentUser()
 
   if (!user) {
-    return { error: 'No autorizado.' };
+    return { error: 'No autorizado.' }
   }
 
-  const dbUser = await getUserById(user.id!);
+  const dbUser = await getUserById(user.id!)
 
   if (!dbUser) {
-    return { error: 'No autorizado.' };
+    return { error: 'No autorizado.' }
   }
 
-  let updateEmail = false;
+  let updateEmail = false
 
   if (values.email && values.email !== user.email) {
-    updateEmail = true;
+    updateEmail = true
   }
 
   if (updateEmail) {
-    const existingUser = await getUserByEmail(values.email);
+    const existingUser = await getUserByEmail(values.email)
 
     if (existingUser && existingUser.id !== user.id) {
-      return { error: 'El correo electrónico ya existe.' };
+      return { error: 'El correo electrónico ya existe.' }
     }
 
-    const verificationToken = await generateVerificationToken(dbUser.id, true);
+    const verificationToken = await generateVerificationToken(dbUser.id, true)
 
     await sendVerificationEmail(
       values.name,
       values.email,
-      verificationToken.token
-    );
+      verificationToken.token,
+    )
   }
 
-  const updatedUser = await db.user.update({
+  await db.user.update({
     where: {
-      id: dbUser.id
+      id: dbUser.id,
     },
     data: {
       name: values.name,
       tempEmail: user.isOAuth || !updateEmail ? undefined : values.email,
       role: values.role,
-      isTwoFactorEnabled: user.isOAuth ? undefined : values.isTwoFactorEnabled
-    }
-  });
+      isTwoFactorEnabled: user.isOAuth ? undefined : values.isTwoFactorEnabled,
+    },
+  })
 
   //update({
   //  user: {
@@ -69,6 +69,6 @@ export async function updateProfile(
   return {
     success: !updateEmail
       ? 'Perfil actualizado.'
-      : 'Perfil actualizado y correo electrónico de verificación enviado.'
-  };
+      : 'Perfil actualizado y correo electrónico de verificación enviado.',
+  }
 }

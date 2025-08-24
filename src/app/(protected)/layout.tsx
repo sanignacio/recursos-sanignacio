@@ -1,16 +1,16 @@
-import { Footer } from '@/components/footer';
+import { Footer } from '@/components/footer'
 
 export default function ProtectedLayout({
-  children
+  children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <>
-      <div className='h-full min-h-[calc(100vh_-_36px_-_48px)] py-10 px-4 w-full flex flex-col gap-y-10 items-center justify-center'>
+      <div className='flex h-full min-h-[calc(100vh_-_36px_-_48px)] w-full flex-col items-center justify-center gap-y-10 px-4 py-10'>
         {children}
       </div>
       <Footer />
     </>
-  );
+  )
 }

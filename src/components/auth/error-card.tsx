@@ -1,6 +1,6 @@
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
 
-import { CardWrapper } from '@/components/auth/card-wrapper';
+import { CardWrapper } from '@/components/auth/card-wrapper'
 
 export default function ErrorCard() {
   return (
@@ -10,9 +10,9 @@ export default function ErrorCard() {
       footerHref='/auth/sign-in'
       footerDesc='Volver al inicio de sesión'
     >
-      <div className='w-full flex justify-center items-center'>
-        <ExclamationTriangleIcon className='text-destructive w-16 h-auto' />
+      <div className='flex w-full items-center justify-center'>
+        <ExclamationTriangleIcon className='text-destructive h-auto w-16' />
       </div>
     </CardWrapper>
-  );
+  )
 }

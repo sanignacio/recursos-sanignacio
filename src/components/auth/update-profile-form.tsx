@@ -1,12 +1,12 @@
-'use client';
+'use client'
 
-import * as z from 'zod';
-import { Loader2 } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { UserRole } from '@prisma/client';
-import { useSession } from 'next-auth/react';
-import { useState, useTransition } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod'
+import { Loader2 } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import { UserRole } from '@prisma/client'
+import { useSession } from 'next-auth/react'
+import { useState, useTransition } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
   Form,
@@ -15,32 +15,32 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from '@/components/ui/form';
+  FormMessage,
+} from '@/components/ui/form'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
-} from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { UpdateProfileSchema } from '@/schemas';
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
-import { updateProfile } from '@/actions/update-profile';
-import { useCurrentUser } from '@/hooks/use-current-user';
-import { cancelNewEmail } from '@/actions/cancel-new-email';
+  SelectValue,
+} from '@/components/ui/select'
+import { Input } from '@/components/ui/input'
+import { UpdateProfileSchema } from '@/schemas'
+import { Button } from '@/components/ui/button'
+import { Switch } from '@/components/ui/switch'
+import { FormError } from '@/components/form-error'
+import { FormSuccess } from '@/components/form-success'
+import { updateProfile } from '@/actions/update-profile'
+import { useCurrentUser } from '@/hooks/use-current-user'
+import { cancelNewEmail } from '@/actions/cancel-new-email'
 
 export default function UpdateProfileForm() {
-  const user = useCurrentUser();
-  const { update } = useSession();
+  const user = useCurrentUser()
+  const { update } = useSession()
 
-  const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
+  const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | undefined>()
+  const [success, setSuccess] = useState<string | undefined>()
 
   const form = useForm<z.infer<typeof UpdateProfileSchema>>({
     resolver: zodResolver(UpdateProfileSchema),
@@ -48,45 +48,45 @@ export default function UpdateProfileForm() {
       name: user?.name || '',
       email: user?.tempEmail ? user.tempEmail : user?.email ? user.email : '',
       role: user?.role || 'STUDENT',
-      isTwoFactorEnabled: user?.isTwoFactorEnabled || false
-    }
-  });
+      isTwoFactorEnabled: user?.isTwoFactorEnabled || false,
+    },
+  })
 
   const onSubmit = (values: z.infer<typeof UpdateProfileSchema>) => {
     startTransition(() => {
       updateProfile(values)
-        .then((data) => {
+        .then(data => {
           if (data.error) {
-            setError(data.error);
+            setError(data.error)
           }
 
           if (data.success) {
-            update();
-            setSuccess(data.success);
+            update()
+            setSuccess(data.success)
           }
         })
-        .catch(() => setError('¡Ups! Algo salió mal.'));
-    });
-  };
+        .catch(() => setError('¡Ups! Algo salió mal.'))
+    })
+  }
 
   const onCancelEmailUpdate = () => {
     startTransition(() => {
       cancelNewEmail()
-        .then((data) => {
+        .then(data => {
           if (data.error) {
-            setError(data.error);
+            setError(data.error)
           }
 
           if (data.success) {
-            update();
-            setSuccess(data.success);
+            update()
+            setSuccess(data.success)
           }
 
-          form.reset();
+          form.reset()
         })
-        .catch(() => setError('¡Ups! Algo salió mal.'));
-    });
-  };
+        .catch(() => setError('¡Ups! Algo salió mal.'))
+    })
+  }
 
   return (
     <Form {...form}>
@@ -137,8 +137,8 @@ export default function UpdateProfileForm() {
                   </div>
                   {!!user.tempEmail && (
                     <FormDescription>
-                      Verifique su nueva dirección de correo electrónico o cancele
-                      el uso de la dirección anterior.
+                      Verifique su nueva dirección de correo electrónico o
+                      cancele el uso de la dirección anterior.
                     </FormDescription>
                   )}
                   <FormMessage />
@@ -164,7 +164,9 @@ export default function UpdateProfileForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value={UserRole.ADMIN}>Administrador</SelectItem>
+                    <SelectItem value={UserRole.ADMIN}>
+                      Administrador
+                    </SelectItem>
                     <SelectItem value={UserRole.TEACHER}>Profesor</SelectItem>
                     <SelectItem value={UserRole.STUDENT}>Alumno</SelectItem>
                   </SelectContent>
@@ -203,7 +205,7 @@ export default function UpdateProfileForm() {
         <Button disabled={isPending} type='submit' className='w-full'>
           {isPending && (
             <>
-              <Loader2 className='animate-spin mr-2' size={18} />
+              <Loader2 className='mr-2 animate-spin' size={18} />
               Guardando...
             </>
           )}
@@ -211,5 +213,5 @@ export default function UpdateProfileForm() {
         </Button>
       </form>
     </Form>
-  );
+  )
 }

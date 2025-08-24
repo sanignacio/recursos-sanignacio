@@ -1,11 +1,11 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
 
 interface AuthFooterProps {
-  href: string;
-  label: string;
-  description: string;
+  href: string
+  label: string
+  description: string
 }
 
 export function AuthFooter({ href, label, description }: AuthFooterProps) {
@@ -16,5 +16,5 @@ export function AuthFooter({ href, label, description }: AuthFooterProps) {
         <Link href={href}>{label}</Link>
       </Button>
     </div>
-  );
+  )
 }
