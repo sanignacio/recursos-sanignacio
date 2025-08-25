@@ -127,10 +127,6 @@ export const authConfig = {
 
       return true;
     },
-    async redirect({ url, baseUrl }) {
-      // TODO: Add logic to only redirect to oauth users
-      return `${baseUrl}/auth/complete-profile`;
-    },
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;

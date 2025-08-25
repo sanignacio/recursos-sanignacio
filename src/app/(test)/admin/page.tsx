@@ -1,9 +1,9 @@
-import AdminComponent from './AdminComponent'
+import AdminComponent from "./AdminComponent";
 
 export const metadata = {
-  title: 'Administrador',
-}
+  title: "Administrador",
+};
 
 export default function AdminPage() {
-  return <AdminComponent />
+  return <AdminComponent />;
 }
