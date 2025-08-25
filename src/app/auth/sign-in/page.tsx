@@ -1,9 +1,9 @@
-import { SignInForm } from '@/components/auth/sign-in-form'
+import { SignInForm } from "~/components/auth/sign-in-form";
 
 export const metadata = {
-  title: 'Iniciar Sesión',
-}
+  title: "Iniciar Sesión",
+};
 
 export default function SignInPage() {
-  return <SignInForm />
+  return <SignInForm />;
 }

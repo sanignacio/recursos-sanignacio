@@ -1,18 +1,23 @@
-import React from 'react'
+import React from "react";
 
-import { AuthFooter } from '@/components/auth/auth-footer'
-import { Header } from '@/components/auth/header'
-import { Social } from '@/components/auth/social'
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+import { AuthFooter } from "~/components/auth/auth-footer";
+import { Header } from "~/components/auth/header";
+import { Social } from "~/components/auth/social";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "~/components/ui/card";
+import { cn } from "~/lib/utils";
 
 interface CardWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
-  headerLabel: string
-  footerLabel: string
-  footerHref: string
-  footerDesc: string
-  showSocial?: boolean
+  children: React.ReactNode;
+  headerLabel: string;
+  footerLabel: string;
+  footerHref: string;
+  footerDesc: string;
+  showSocial?: boolean;
 }
 
 export const CardWrapper = React.forwardRef<HTMLDivElement, CardWrapperProps>(
@@ -32,7 +37,7 @@ export const CardWrapper = React.forwardRef<HTMLDivElement, CardWrapperProps>(
     return (
       <Card
         ref={ref}
-        className={cn('w-full shadow-md md:w-[450px]', className)}
+        className={cn("w-full shadow-md md:w-[450px]", className)}
         {...rest}
       >
         <CardHeader>
@@ -44,7 +49,7 @@ export const CardWrapper = React.forwardRef<HTMLDivElement, CardWrapperProps>(
             <Social />
           </CardFooter>
         )}
-        <CardFooter className='justify-center'>
+        <CardFooter className="justify-center">
           <AuthFooter
             label={footerLabel}
             href={footerHref}
@@ -52,7 +57,7 @@ export const CardWrapper = React.forwardRef<HTMLDivElement, CardWrapperProps>(
           />
         </CardFooter>
       </Card>
-    )
+    );
   },
-)
-CardWrapper.displayName = 'CardWrapper'
+);
+CardWrapper.displayName = "CardWrapper";

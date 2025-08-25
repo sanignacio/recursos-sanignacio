@@ -1,4 +1,4 @@
-import { db } from '@/lib/db'
+import { db } from "~/server/db";
 
 export async function getPasswordResetTokenByToken(token: string) {
   try {
@@ -6,11 +6,11 @@ export async function getPasswordResetTokenByToken(token: string) {
       where: {
         token,
       },
-    })
+    });
 
-    return passwordResetToken
+    return passwordResetToken;
   } catch {
-    return null
+    return null;
   }
 }
 
@@ -20,10 +20,10 @@ export async function getPasswordResetTokenByEmail(email: string) {
       where: {
         email,
       },
-    })
+    });
 
-    return passwordResetToken
+    return passwordResetToken;
   } catch {
-    return null
+    return null;
   }
 }

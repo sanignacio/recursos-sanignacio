@@ -1,122 +1,122 @@
-import { UserRole } from '@prisma/client'
-import fs from 'fs'
-import { writeFile } from 'fs/promises'
-import { NextRequest, NextResponse } from 'next/server'
-import path from 'path'
-import { v4 as uuidv4 } from 'uuid'
+import { UserRole } from "@prisma/client";
+import fs from "fs";
+import { writeFile } from "fs/promises";
+import { type NextRequest, NextResponse } from "next/server";
+import path from "path";
+import { v4 as uuidv4 } from "uuid";
 
-import { currentUser } from '@/lib/authentication'
+import { currentUser } from "~/lib/authentication";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 interface UploadedFile {
-  name: string
+  name: string;
 }
 
 interface Task {
-  taskId: string
-  userId: string
-  files: UploadedFile[]
+  taskId: string;
+  userId: string;
+  files: UploadedFile[];
 }
 
-const UPLOADS_DIR = path.join(process.cwd(), 'uploads')
+const UPLOADS_DIR = path.join(process.cwd(), "uploads");
 
 export async function GET() {
-  const session = await currentUser()
+  const session = await currentUser();
   if (!session?.id)
-    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   if (session.role !== UserRole.ADMIN) {
     return NextResponse.json(
-      { error: 'No autorizado: solo admins' },
+      { error: "No autorizado: solo admins" },
       { status: 403 },
-    )
+    );
   }
 
-  if (!fs.existsSync(UPLOADS_DIR)) return NextResponse.json({ tasks: [] })
+  if (!fs.existsSync(UPLOADS_DIR)) return NextResponse.json({ tasks: [] });
 
-  const tasks: Task[] = []
+  const tasks: Task[] = [];
   const users = fs
     .readdirSync(UPLOADS_DIR, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name)
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
 
-  users.forEach(userId => {
-    const userDir = path.join(UPLOADS_DIR, userId)
+  users.forEach((userId) => {
+    const userDir = path.join(UPLOADS_DIR, userId);
     const taskIds = fs
       .readdirSync(userDir, { withFileTypes: true })
-      .filter(dirent => dirent.isDirectory())
-      .map(dirent => dirent.name)
+      .filter((dirent) => dirent.isDirectory())
+      .map((dirent) => dirent.name);
 
-    taskIds.forEach(taskId => {
-      const taskDir = path.join(userDir, taskId)
+    taskIds.forEach((taskId) => {
+      const taskDir = path.join(userDir, taskId);
 
       const files = fs
         .readdirSync(taskDir, { withFileTypes: true })
-        .filter(dirent => dirent.isFile())
-        .map(dirent => ({ name: dirent.name }))
+        .filter((dirent) => dirent.isFile())
+        .map((dirent) => ({ name: dirent.name }));
 
-      tasks.push({ taskId, userId, files })
-    })
-  })
+      tasks.push({ taskId, userId, files });
+    });
+  });
 
-  return NextResponse.json({ tasks })
+  return NextResponse.json({ tasks });
 }
 
 export async function POST(req: NextRequest) {
-  const session = await currentUser()
+  const session = await currentUser();
   if (!session?.id)
-    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
-  const userId = session.id.toString()
-  const taskId = uuidv4()
-  const uploadDir = path.join(UPLOADS_DIR, userId, taskId)
-  fs.mkdirSync(uploadDir, { recursive: true })
+  const userId = session.id.toString();
+  const taskId = uuidv4();
+  const uploadDir = path.join(UPLOADS_DIR, userId, taskId);
+  fs.mkdirSync(uploadDir, { recursive: true });
 
-  const formData = await req.formData()
-  const uploadedFiles: UploadedFile[] = []
+  const formData = await req.formData();
+  const uploadedFiles: UploadedFile[] = [];
 
-  const file = formData.get('file')
+  const file = formData.get("file");
   if (!file) {
     return NextResponse.json(
-      { error: 'No se recibieron archivos.' },
+      { error: "No se recibieron archivos." },
       { status: 400 },
-    )
+    );
   }
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line no-unused-vars
     for (const [_, value] of Array.from(formData.entries())) {
       if (value instanceof File) {
-        const filename = value.name.replaceAll(' ', '_')
-        const buffer = Buffer.from(await value.arrayBuffer())
-        await writeFile(path.join(uploadDir, filename), buffer)
-        uploadedFiles.push({ name: value.name })
+        const filename = value.name.replaceAll(" ", "_");
+        const buffer = Buffer.from(await value.arrayBuffer());
+        await writeFile(path.join(uploadDir, filename), buffer);
+        uploadedFiles.push({ name: value.name });
       }
     }
-    return NextResponse.json({ message: 'Éxito', taskId, status: 201 })
+    return NextResponse.json({ message: "Éxito", taskId, status: 201 });
   } catch {
     return NextResponse.json(
-      { error: 'Error al guardar el archivo.' },
+      { error: "Error al guardar el archivo." },
       { status: 500 },
-    )
+    );
   }
 }
 
 export async function DELETE(req: NextRequest) {
-  const session = await currentUser()
+  const session = await currentUser();
   if (!session?.id)
-    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
-  const taskId = req.nextUrl.searchParams.get('taskId')
-  const userId = req.nextUrl.searchParams.get('userId')
+  const taskId = req.nextUrl.searchParams.get("taskId");
+  const userId = req.nextUrl.searchParams.get("userId");
 
   if (!userId || !taskId)
-    return NextResponse.json({ error: 'Faltan parámetros' }, { status: 400 })
+    return NextResponse.json({ error: "Faltan parámetros" }, { status: 400 });
 
-  const taskDir = path.join(UPLOADS_DIR, userId, taskId)
+  const taskDir = path.join(UPLOADS_DIR, userId, taskId);
   if (fs.existsSync(taskDir))
-    fs.rmSync(taskDir, { recursive: true, force: true })
+    fs.rmSync(taskDir, { recursive: true, force: true });
 
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ success: true });
 }

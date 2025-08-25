@@ -1,4 +1,4 @@
-import { db } from '@/lib/db'
+import { db } from "~/server/db";
 
 export async function getTwoFactorTokenByToken(token: string) {
   try {
@@ -6,11 +6,11 @@ export async function getTwoFactorTokenByToken(token: string) {
       where: {
         token,
       },
-    })
+    });
 
-    return twoFactorToken
+    return twoFactorToken;
   } catch {
-    return null
+    return null;
   }
 }
 
@@ -20,10 +20,10 @@ export async function getTwoFactorTokenByEmail(email: string) {
       where: {
         email,
       },
-    })
+    });
 
-    return twoFactorToken
+    return twoFactorToken;
   } catch {
-    return null
+    return null;
   }
 }

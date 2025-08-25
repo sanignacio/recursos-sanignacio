@@ -1,4 +1,4 @@
-import { db } from '@/lib/db'
+import { db } from "~/server/db";
 
 export async function getUserByEmail(email: string) {
   try {
@@ -6,11 +6,11 @@ export async function getUserByEmail(email: string) {
       where: {
         email,
       },
-    })
+    });
 
-    return user
+    return user;
   } catch {
-    return null
+    return null;
   }
 }
 
@@ -20,10 +20,10 @@ export async function getUserById(id: string) {
       where: {
         id,
       },
-    })
+    });
 
-    return user
+    return user;
   } catch {
-    return null
+    return null;
   }
 }

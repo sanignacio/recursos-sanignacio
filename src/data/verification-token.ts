@@ -1,4 +1,4 @@
-import { db } from '@/lib/db'
+import { db } from "~/server/db";
 
 export async function getVerificationTokenByToken(token: string) {
   try {
@@ -6,11 +6,11 @@ export async function getVerificationTokenByToken(token: string) {
       where: {
         token,
       },
-    })
+    });
 
-    return verificationToken
+    return verificationToken;
   } catch {
-    return null
+    return null;
   }
 }
 
@@ -20,10 +20,10 @@ export async function getVerificationTokenByUserId(userId: string) {
       where: {
         userId,
       },
-    })
+    });
 
-    return verificationToken
+    return verificationToken;
   } catch {
-    return null
+    return null;
   }
 }
