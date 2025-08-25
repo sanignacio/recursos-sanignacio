@@ -1,38 +1,38 @@
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { FlatCompat } from '@eslint/eslintrc'
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
 const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
+  baseDirectory: __dirname,
 })
 
 const eslintConfig = [
   ...compat.config({
     extends: [
-      'next',
       'next/core-web-vitals',
       'next/typescript',
-      'plugin:jsx-a11y/recommended',
       'prettier',
+      'plugin:jsx-a11y/recommended',
     ],
-    plugins: ['jsx-a11y'],
+    plugins: ['simple-import-sort'],
     rules: {
-      'react/react-in-jsx-scope': 'off',
-      'jsx-a11y/alt-text': 'warn',
-      'jsx-a11y/aria-props': 'warn',
-      'jsx-a11y/aria-proptypes': 'warn',
-      'jsx-a11y/aria-unsupported-elements': 'warn',
-      'jsx-a11y/role-has-required-aria-props': 'warn',
-      'jsx-a11y/role-supports-aria-props': 'warn',
+      'simple-import-sort/imports': 'warn',
+      'simple-import-sort/exports': 'warn',
     },
   }),
   {
     ignores: [
-      'node_modules/**',
-      '.next/**',
-      'out/**',
-      'build/**',
-      'next-env.d.ts',
+      "node_modules/**",
+      ".next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
     ],
   },
+
 ]
 
 export default eslintConfig
