@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { ShieldCheck } from 'lucide-react'
+import Link from 'next/link'
 
 interface AuthHeaderProps {
   label: string
@@ -12,7 +12,7 @@ export function Header({ label }: AuthHeaderProps) {
         <ShieldCheck strokeWidth={2.5} className='mr-1 h-auto w-10' />
         <h2 className='text-xl font-bold'>Recursos San Ignacio</h2>
       </Link>
-      <p className='text-muted-foreground text-sm'>{label}</p>
+      <p className='text-sm text-muted-foreground'>{label}</p>
     </div>
   )
 }

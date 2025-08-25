@@ -1,11 +1,17 @@
 'use client'
 
-import * as z from 'zod'
-import { Loader2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
-import { useState, useTransition } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { UserRole } from '@prisma/client'
+import { Loader2 } from 'lucide-react'
+import { useState, useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
 
+import { signUp } from '@/actions/sign-up'
+import { CardWrapper } from '@/components/auth/card-wrapper'
+import { FormError } from '@/components/form-error'
+import { FormSuccess } from '@/components/form-success'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -14,13 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { SignUpSchema } from '@/schemas'
-import { signUp } from '@/actions/sign-up'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { FormError } from '@/components/form-error'
-import { FormSuccess } from '@/components/form-success'
-import { CardWrapper } from '@/components/auth/card-wrapper'
 import {
   Select,
   SelectContent,
@@ -28,7 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { UserRole } from '@prisma/client'
+import { SignUpSchema } from '@/schemas'
 
 export function SignUpForm() {
   const [isPending, startTransition] = useTransition()

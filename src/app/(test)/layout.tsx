@@ -9,7 +9,7 @@ export default function TestLayout({
   return (
     <>
       <div className='flex h-full min-h-[calc(100vh-36px-48px)] w-full flex-col items-center justify-center gap-y-10 px-4 py-10'>
-        <div className='bg-background w-full max-w-[600px] overflow-hidden rounded-[0.5rem] border shadow-md md:shadow-xl'>
+        <div className='w-full max-w-[600px] overflow-hidden rounded-[0.5rem] border bg-background shadow-md md:shadow-xl'>
           <div className='flex flex-col'>
             <Navbar />
             <div className='p-4 md:p-8'>{children}</div>

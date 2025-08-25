@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 
 import { SignInForm } from '@/components/auth/sign-in-form'
+import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
 interface SignInButtonProps {
@@ -34,8 +35,8 @@ export function SignInButton({
   }
 
   return (
-    <span onClick={onClick} className='cursor-pointer'>
+    <Button onClick={onClick} className='cursor-pointer'>
       {children}
-    </span>
+    </Button>
   )
 }

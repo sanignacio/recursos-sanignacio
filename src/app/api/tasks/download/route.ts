@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
+import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
+
 import { currentUser } from '@/lib/authentication'
 
 export const dynamic = 'force-dynamic'

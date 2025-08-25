@@ -1,13 +1,18 @@
 'use client'
 
-import * as z from 'zod'
-import { Loader2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { UserRole } from '@prisma/client'
+import { Loader2 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useState, useTransition } from 'react'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
 
+import { cancelNewEmail } from '@/actions/cancel-new-email'
+import { updateProfile } from '@/actions/update-profile'
+import { FormError } from '@/components/form-error'
+import { FormSuccess } from '@/components/form-success'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -17,6 +22,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -24,15 +30,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
-import { UpdateProfileSchema } from '@/schemas'
-import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
-import { FormError } from '@/components/form-error'
-import { FormSuccess } from '@/components/form-success'
-import { updateProfile } from '@/actions/update-profile'
 import { useCurrentUser } from '@/hooks/use-current-user'
-import { cancelNewEmail } from '@/actions/cancel-new-email'
+import { UpdateProfileSchema } from '@/schemas'
 
 export default function UpdateProfileForm() {
   const user = useCurrentUser()

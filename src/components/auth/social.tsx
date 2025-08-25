@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import { Loader2 } from 'lucide-react'
-import { signIn } from 'next-auth/react'
-import { FcGoogle } from 'react-icons/fc'
 import { useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react'
+import { useState } from 'react'
+import { FcGoogle } from 'react-icons/fc'
 
 import { Button } from '@/components/ui/button'
 import { DEFAULT_SIGNIN_REDIRECT } from '&/routes'
@@ -24,7 +24,7 @@ export function Social() {
   return (
     <div className='flex w-full flex-col'>
       <div className='mt-1 mb-6 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-200 after:mt-0.5 after:flex-1 after:border-t after:border-gray-200 dark:before:border-gray-400 dark:after:border-gray-400'>
-        <p className='text-muted-foreground mx-4 mb-0 text-center font-medium'>
+        <p className='mx-4 mb-0 text-center font-medium text-muted-foreground'>
           or
         </p>
       </div>

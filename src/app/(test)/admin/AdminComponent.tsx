@@ -1,13 +1,13 @@
 'use client'
 
-import { toast } from 'sonner'
-import { Lock } from 'lucide-react'
 import { UserRole } from '@prisma/client'
+import { Lock } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { admin } from '@/actions/admin'
-import { Button } from '@/components/ui/button'
 import { RoleGate } from '@/components/auth/role-gate'
 import { FormSuccess } from '@/components/form-success'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 export default function AdminComponent() {

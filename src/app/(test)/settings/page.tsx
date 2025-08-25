@@ -1,9 +1,9 @@
 import { UserCog } from 'lucide-react'
 
-import { currentUser } from '@/lib/authentication'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import UpdateProfileForm from '@/components/auth/update-profile-form'
 import UpdatePasswordForm from '@/components/auth/update-password-form'
+import UpdateProfileForm from '@/components/auth/update-profile-form'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { currentUser } from '@/lib/authentication'
 
 export const metadata = {
   title: 'Configuración',

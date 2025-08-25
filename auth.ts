@@ -1,16 +1,16 @@
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import { UserRole } from '@prisma/client'
 import NextAuth, {
+  type Account,
   type NextAuthConfig,
   type User,
-  type Account,
 } from 'next-auth'
-import { UserRole } from '@prisma/client'
-import { PrismaAdapter } from '@auth/prisma-adapter'
 
-import { db } from '@/lib/db'
-import authConfig from '&/auth.config'
-import { getUserById } from '@/data/user'
 import { getAccountByUserId } from '@/data/account'
 import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation'
+import { getUserById } from '@/data/user'
+import { db } from '@/lib/db'
+import authConfig from '&/auth.config'
 
 const authOptions: NextAuthConfig = {
   pages: {
@@ -100,6 +100,11 @@ const authOptions: NextAuthConfig = {
   ...authConfig,
 }
 
-export const { auth, signIn, signOut, handlers } = NextAuth(authOptions)
+const nextAuth = NextAuth(authOptions)
+
+export const auth = nextAuth.auth
+export const signIn: typeof nextAuth.signIn = nextAuth.signIn
+export const signOut: typeof nextAuth.signOut = nextAuth.signOut
+export const handlers = nextAuth.handlers
 
 export const { GET, POST } = handlers

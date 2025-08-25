@@ -1,6 +1,7 @@
 'use client'
 
 import { signOut } from '@/actions/sign-out'
+import { Button } from '@/components/ui/button'
 
 interface SignOutButtonProps {
   children?: React.ReactNode
@@ -8,8 +9,8 @@ interface SignOutButtonProps {
 
 export function SignOutButton({ children }: SignOutButtonProps) {
   return (
-    <span onClick={() => signOut()} className='cursor-pointer'>
+    <Button onClick={() => signOut()} className='cursor-pointer'>
       {children}
-    </span>
+    </Button>
   )
 }

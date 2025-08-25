@@ -1,11 +1,11 @@
 'use client'
 
+import { FileText, ImageIcon, Upload, X } from 'lucide-react'
 import type React from 'react'
-
 import { useRef, useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Upload, X, ImageIcon, FileText } from 'lucide-react'
 
 interface ImageUploaderProps {
   onSubmit?: (files: File[]) => void
@@ -60,11 +60,9 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
 
   const getFileIcon = (file: File) => {
     if (file.type === 'application/pdf') {
-      return (
-        <FileText className='text-muted-foreground h-4 w-4 shrink-0' />
-      )
+      return <FileText className='h-4 w-4 shrink-0 text-muted-foreground' />
     }
-    return <ImageIcon className='text-muted-foreground h-4 w-4 shrink-0' />
+    return <ImageIcon className='h-4 w-4 shrink-0 text-muted-foreground' />
   }
 
   return (
@@ -72,7 +70,7 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
       <CardContent className='p-6'>
         <form onSubmit={handleSubmit} className='space-y-4'>
           {/* File Input Area */}
-          <div className='border-border hover:border-primary/50 rounded-lg border-2 border-dashed text-center transition-colors'>
+          <div className='rounded-lg border-2 border-dashed border-border text-center transition-colors hover:border-primary/50'>
             <input
               ref={inputRef}
               type='file'
@@ -86,14 +84,14 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
               htmlFor='file-upload'
               className='flex cursor-pointer flex-col items-center gap-2 p-8'
             >
-              <Upload className='text-muted-foreground h-8 w-8' />
-              <div className='text-muted-foreground text-sm'>
-                <span className='text-primary font-medium'>
+              <Upload className='h-8 w-8 text-muted-foreground' />
+              <div className='text-sm text-muted-foreground'>
+                <span className='font-medium text-primary'>
                   Haz clic para subir
                 </span>{' '}
                 o arrastra y suelta
               </div>
-              <div className='text-muted-foreground text-xs'>
+              <div className='text-xs text-muted-foreground'>
                 Imágenes (PNG, JPG, GIF) y PDFs hasta 10MB
               </div>
             </label>
@@ -113,7 +111,7 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
                       <div className='truncate text-sm font-medium'>
                         {file.name}
                       </div>
-                      <div className='text-muted-foreground text-xs'>
+                      <div className='text-xs text-muted-foreground'>
                         {formatFileSize(file.size)}
                       </div>
                     </div>
@@ -122,7 +120,7 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
                       variant='ghost'
                       size='sm'
                       onClick={() => removeFile(index)}
-                      className='hover:bg-destructive/10 h-6 w-6 p-0'
+                      className='h-6 w-6 p-0 hover:bg-destructive/10'
                     >
                       <X className='h-3 w-3' />
                     </Button>

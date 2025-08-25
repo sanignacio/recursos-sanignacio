@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { FaUser } from 'react-icons/fa'
 
+import { SignOutButton } from '@/components/auth/sign-out-button'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/ui/button'
 import { useCurrentUser } from '@/hooks/use-current-user'
-import { SignOutButton } from '@/components/auth/sign-out-button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 export function UserButton() {
   const user = useCurrentUser()
@@ -36,7 +36,7 @@ export function UserButton() {
             <p className='truncate text-sm leading-none font-medium'>
               {user?.name}
             </p>
-            <p className='text-muted-foreground truncate text-xs leading-none'>
+            <p className='truncate text-xs leading-none text-muted-foreground'>
               {user?.email}
             </p>
           </div>

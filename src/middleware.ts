@@ -1,12 +1,12 @@
 import NextAuth, { NextAuthRequest } from 'next-auth'
 
-import {
-  authRoutes,
-  publicRoutes,
-  apiAuthPrefix,
-  DEFAULT_SIGNIN_REDIRECT,
-} from '&/routes'
 import authConfig from '&/auth.config'
+import {
+  apiAuthPrefix,
+  authRoutes,
+  DEFAULT_SIGNIN_REDIRECT,
+  publicRoutes,
+} from '&/routes'
 
 export const { auth } = NextAuth(authConfig)
 

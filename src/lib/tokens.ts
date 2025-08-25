@@ -1,10 +1,10 @@
 import crypto from 'crypto'
 import { v4 as uuidv4 } from 'uuid'
 
-import { db } from '@/lib/db'
-import { getVerificationTokenByUserId } from '@/data/verification-token'
 import { getPasswordResetTokenByEmail } from '@/data/password-reset-token'
 import { getTwoFactorTokenByEmail } from '@/data/two-factor-token'
+import { getVerificationTokenByUserId } from '@/data/verification-token'
+import { db } from '@/lib/db'
 
 export async function generateVerificationToken(
   userId: string,

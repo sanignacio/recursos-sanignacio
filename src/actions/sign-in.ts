@@ -1,17 +1,17 @@
 'use server'
 
-import * as z from 'zod'
 import { AuthError } from 'next-auth'
+import * as z from 'zod'
 
-import { generateTwoFactorToken, generateVerificationToken } from '@/lib/tokens'
-import { db } from '@/lib/db'
-import { SignInSchema } from '@/schemas'
+import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation'
+import { getTwoFactorTokenByEmail } from '@/data/two-factor-token'
 import { getUserByEmail } from '@/data/user'
+import { db } from '@/lib/db'
+import { sendTwoFactorTokenEmail, sendVerificationEmail } from '@/lib/mail'
+import { generateTwoFactorToken, generateVerificationToken } from '@/lib/tokens'
+import { SignInSchema } from '@/schemas'
 import { signIn as authSignIn } from '&/auth'
 import { DEFAULT_SIGNIN_REDIRECT } from '&/routes'
-import { getTwoFactorTokenByEmail } from '@/data/two-factor-token'
-import { sendTwoFactorTokenEmail, sendVerificationEmail } from '@/lib/mail'
-import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation'
 
 export async function signIn(
   values: z.infer<typeof SignInSchema>,
@@ -110,6 +110,7 @@ export async function signIn(
       password,
       redirectTo: callbackUrl || DEFAULT_SIGNIN_REDIRECT,
     })
+    return { success: true }
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {

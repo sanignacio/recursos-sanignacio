@@ -1,18 +1,18 @@
 'use client'
 
-import Link from 'next/link'
 import { Menu, ShieldCheck } from 'lucide-react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import { UserButton } from '@/components/auth/user-button'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
-  DropdownMenuItem,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { UserButton } from '@/components/auth/user-button'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -52,7 +52,7 @@ export function Navbar() {
         <Link
           href='/server'
           className={cn(
-            'hover:text-primary text-sm font-semibold transition-colors',
+            'text-sm font-semibold transition-colors hover:text-primary',
             pathname !== '/server' && 'text-muted-foreground',
           )}
         >
@@ -61,7 +61,7 @@ export function Navbar() {
         <Link
           href='/client'
           className={cn(
-            'hover:text-primary text-sm font-semibold transition-colors',
+            'text-sm font-semibold transition-colors hover:text-primary',
             pathname !== '/client' && 'text-muted-foreground',
           )}
         >
@@ -70,7 +70,7 @@ export function Navbar() {
         <Link
           href='/admin'
           className={cn(
-            'hover:text-primary text-sm font-semibold transition-colors',
+            'text-sm font-semibold transition-colors hover:text-primary',
             pathname !== '/admin' && 'text-muted-foreground',
           )}
         >
@@ -79,7 +79,7 @@ export function Navbar() {
         <Link
           href='/settings'
           className={cn(
-            'hover:text-primary text-sm font-semibold transition-colors',
+            'text-sm font-semibold transition-colors hover:text-primary',
             pathname !== '/settings' && 'text-muted-foreground',
           )}
         >

@@ -1,13 +1,13 @@
 'use server'
 
-import * as z from 'zod'
 import bcrypt from 'bcryptjs'
+import * as z from 'zod'
 
-import { db } from '@/lib/db'
-import { SignUpSchema } from '@/schemas'
 import { getUserByEmail } from '@/data/user'
+import { db } from '@/lib/db'
 import { sendVerificationEmail } from '@/lib/mail'
 import { generateVerificationToken } from '@/lib/tokens'
+import { SignUpSchema } from '@/schemas'
 
 const SignUpSchemaWithDomain = SignUpSchema //.refine(
 //  (data) => data.email.endsWith('@sanignacio.edu.uy'),

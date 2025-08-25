@@ -1,7 +1,8 @@
 'use client'
 
-import ImageUploader from '@/components/ui/image-uploader'
 import { Printer } from 'lucide-react'
+
+import ImageUploader from '@/components/ui/image-uploader'
 
 export default function PrintComponent() {
   const handleUpload = async (files: File[]) => {

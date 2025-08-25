@@ -1,22 +1,22 @@
 'use client'
 
-import * as React from 'react'
-import { useTheme } from 'next-themes'
 import { MixerVerticalIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
+import { useTheme } from 'next-themes'
+import * as React from 'react'
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/ui/button'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 export function ModeToggle() {
   const { setTheme } = useTheme()
@@ -28,7 +28,7 @@ export function ModeToggle() {
           <TooltipTrigger asChild>
             <DropdownMenuTrigger asChild>
               <Button
-                className='bg-background h-8 w-8 rounded-full'
+                className='h-8 w-8 rounded-full bg-background'
                 variant='outline'
                 size='icon'
               >
@@ -46,21 +46,21 @@ export function ModeToggle() {
           className='hover:cursor-pointer'
           onClick={() => setTheme('light')}
         >
-          <SunIcon className='dark:text-foreground mr-2 h-4 w-4' />
+          <SunIcon className='mr-2 h-4 w-4 dark:text-foreground' />
           Claro
         </DropdownMenuItem>
         <DropdownMenuItem
           className='hover:cursor-pointer'
           onClick={() => setTheme('dark')}
         >
-          <MoonIcon className='dark:text-foreground mr-2 h-4 w-4' />
+          <MoonIcon className='mr-2 h-4 w-4 dark:text-foreground' />
           Oscuro
         </DropdownMenuItem>
         <DropdownMenuItem
           className='hover:cursor-pointer'
           onClick={() => setTheme('system')}
         >
-          <MixerVerticalIcon className='dark:text-foreground mr-2 h-4 w-4' />
+          <MixerVerticalIcon className='mr-2 h-4 w-4 dark:text-foreground' />
           Sistema
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -11,7 +11,7 @@ interface AuthFooterProps {
 export function AuthFooter({ href, label, description }: AuthFooterProps) {
   return (
     <div className='flex items-center'>
-      <p className='text-muted-foreground text-xs'>{description}</p>
+      <p className='text-xs text-muted-foreground'>{description}</p>
       <Button variant='link' className='p-0 pl-1.5' size='sm' asChild>
         <Link href={href}>{label}</Link>
       </Button>

@@ -1,13 +1,18 @@
 'use client'
 
-import * as z from 'zod'
-import Link from 'next/link'
-import { Loader2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
-import { useState, useTransition } from 'react'
-import { useSearchParams } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useState, useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
 
+import { signIn } from '@/actions/sign-in'
+import { CardWrapper } from '@/components/auth/card-wrapper'
+import { FormError } from '@/components/form-error'
+import { FormSuccess } from '@/components/form-success'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -16,13 +21,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { SignInSchema } from '@/schemas'
-import { signIn } from '@/actions/sign-in'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { FormError } from '@/components/form-error'
-import { FormSuccess } from '@/components/form-success'
-import { CardWrapper } from '@/components/auth/card-wrapper'
+import { SignInSchema } from '@/schemas'
 
 export function SignInForm() {
   const searchParams = useSearchParams()
@@ -59,7 +59,7 @@ export function SignInForm() {
 
           if (data?.success) {
             form.reset()
-            setSuccess(data.success)
+            setSuccess(typeof data.success === 'string' ? data.success : '')
           }
 
           if (data?.twoFactor) {

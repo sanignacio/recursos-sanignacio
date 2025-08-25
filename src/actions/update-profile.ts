@@ -2,12 +2,12 @@
 
 import * as z from 'zod'
 
-import { db } from '@/lib/db'
-import { UpdateProfileSchema } from '@/schemas'
-import { sendVerificationEmail } from '@/lib/mail'
-import { currentUser } from '@/lib/authentication'
-import { generateVerificationToken } from '@/lib/tokens'
 import { getUserByEmail, getUserById } from '@/data/user'
+import { currentUser } from '@/lib/authentication'
+import { db } from '@/lib/db'
+import { sendVerificationEmail } from '@/lib/mail'
+import { generateVerificationToken } from '@/lib/tokens'
+import { UpdateProfileSchema } from '@/schemas'
 
 export async function updateProfile(
   values: z.infer<typeof UpdateProfileSchema>,

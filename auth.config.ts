@@ -1,12 +1,12 @@
 import bcrypt from 'bcryptjs'
 import type { NextAuthConfig } from 'next-auth'
-import Google from 'next-auth/providers/google'
 import credentials from 'next-auth/providers/credentials'
+import Google from 'next-auth/providers/google'
 
-import { SignInSchema } from '@/schemas'
 import { getUserByEmail } from '@/data/user'
+import { SignInSchema } from '@/schemas'
 
-export default {
+const authConfig: NextAuthConfig = {
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -36,4 +36,6 @@ export default {
       },
     }),
   ],
-} satisfies NextAuthConfig
+}
+
+export default authConfig

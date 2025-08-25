@@ -1,12 +1,12 @@
 'use server'
 
-import * as z from 'zod'
 import bcrypt, { compare } from 'bcryptjs'
+import * as z from 'zod'
 
-import { db } from '@/lib/db'
 import { getUserById } from '@/data/user'
-import { UpdatePasswordSchema } from '@/schemas'
 import { currentUser } from '@/lib/authentication'
+import { db } from '@/lib/db'
+import { UpdatePasswordSchema } from '@/schemas'
 
 export async function updatePassword(
   values: z.infer<typeof UpdatePasswordSchema>,

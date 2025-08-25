@@ -1,12 +1,16 @@
 'use client'
 
-import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
 import { useSession } from 'next-auth/react'
 import { useState, useTransition } from 'react'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
 
+import { updatePassword } from '@/actions/update-password'
+import { FormError } from '@/components/form-error'
+import { FormSuccess } from '@/components/form-success'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -16,12 +20,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { UpdatePasswordSchema } from '@/schemas'
-import { FormError } from '@/components/form-error'
-import { FormSuccess } from '@/components/form-success'
 import { useCurrentUser } from '@/hooks/use-current-user'
-import { updatePassword } from '@/actions/update-password'
+import { UpdatePasswordSchema } from '@/schemas'
 
 export default function UpdatePasswordForm() {
   const user = useCurrentUser()

@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import { ShieldCheck } from 'lucide-react'
 import { ArrowRightIcon } from '@radix-ui/react-icons'
+import { ShieldCheck } from 'lucide-react'
+import Link from 'next/link'
 
+import { SignInButton } from '@/components/auth/sign-in-button'
 import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
-import { SignInButton } from '@/components/auth/sign-in-button'
 
 export default function HomePage() {
   return (
@@ -24,7 +24,7 @@ export default function HomePage() {
             <h1 className='text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl'>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
             </h1>
-            <p className='text-muted-foreground max-w-2xl leading-normal sm:text-lg sm:leading-8'>
+            <p className='max-w-2xl leading-normal text-muted-foreground sm:text-lg sm:leading-8'>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
             </p>
             <div className='mt-5 space-x-4'>

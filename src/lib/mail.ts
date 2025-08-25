@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 
-import { PasswordReset } from '@/components/emails/password-reset'
 import { EmailVerification } from '@/components/emails/email-verification'
+import { PasswordReset } from '@/components/emails/password-reset'
 import { TwoFactorAuthentication } from '@/components/emails/two-factor-authentication'
 
 const resend = new Resend(process.env.RESEND_API_KEY)

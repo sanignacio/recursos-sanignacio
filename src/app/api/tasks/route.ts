@@ -1,10 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
-import { currentUser } from '@/lib/authentication'
-import { v4 as uuidv4 } from 'uuid'
 import { UserRole } from '@prisma/client'
+import fs from 'fs'
 import { writeFile } from 'fs/promises'
+import { NextRequest, NextResponse } from 'next/server'
+import path from 'path'
+import { v4 as uuidv4 } from 'uuid'
+
+import { currentUser } from '@/lib/authentication'
 
 export const dynamic = 'force-dynamic'
 
@@ -84,6 +85,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for (const [_, value] of Array.from(formData.entries())) {
       if (value instanceof File) {
         const filename = value.name.replaceAll(' ', '_')

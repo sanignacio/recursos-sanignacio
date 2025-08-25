@@ -10,6 +10,7 @@
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
+    "lint": "eslint . --ext ts --ext tsx --ext js --fix",
     "test-all": "pnpm run check-format && pnpm run check-lint && pnpm run check-types && pnpm run build"
   },
   "dependencies": {

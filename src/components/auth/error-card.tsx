@@ -11,7 +11,7 @@ export default function ErrorCard() {
       footerDesc='Volver al inicio de sesión'
     >
       <div className='flex w-full items-center justify-center'>
-        <ExclamationTriangleIcon className='text-destructive h-auto w-16' />
+        <ExclamationTriangleIcon className='h-auto w-16 text-destructive' />
       </div>
     </CardWrapper>
   )

@@ -1,8 +1,8 @@
 import { LucideIcon } from 'lucide-react'
 
-import { ExtendedUser } from '&/next-auth'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { ExtendedUser } from '&/next-auth'
 
 interface UserInfoProps {
   user?: ExtendedUser

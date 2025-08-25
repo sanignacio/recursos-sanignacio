@@ -1,9 +1,9 @@
 'use server'
 
-import { db } from '@/lib/db'
 import { getUserById } from '@/data/user'
-import { currentUser } from '@/lib/authentication'
 import { getVerificationTokenByUserId } from '@/data/verification-token'
+import { currentUser } from '@/lib/authentication'
+import { db } from '@/lib/db'
 
 export async function cancelNewEmail() {
   const user = await currentUser()
