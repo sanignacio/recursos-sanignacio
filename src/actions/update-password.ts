@@ -8,7 +8,6 @@ import { currentUser } from "~/lib/authentication";
 import { db } from "~/server/db";
 import { type UpdatePasswordSchema } from "~/schemas";
 import { update } from "~/server/auth";
-import { getSession } from "next-auth/react";
 
 export async function updatePassword(
   values: z.infer<typeof UpdatePasswordSchema>,
@@ -56,7 +55,6 @@ export async function updatePassword(
       role: updatedUser.role,
     },
   });
-  await getSession();
 
   return { success: "Contraseña actualizada." };
 }

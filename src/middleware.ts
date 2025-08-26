@@ -33,17 +33,35 @@ export default auth((req) => {
   }
 
   // Treat users not signed in or without role as unauthenticated
-  if (!isSignedIn || (!userRole && !isPublicRoute)) {
-    // Redirect unauthenticated users to sign-in and users with no role to complete-profile
-    let redirectPath = !isSignedIn ? "/auth/sign-in" : "/auth/complete-profile";
-    let callbackUrl = nextUrl.pathname;
-    if (nextUrl.search) callbackUrl += nextUrl.search;
-    redirectPath += `?callbackUrl=${encodeURIComponent(callbackUrl)}`;
+  // Unauthenticated users can only access public routes
+  // Not signed in users are redirected to /auth/sign-in
+  // Signed in users with no role are redirected to /auth/complete-profile
+  // If the route is public, allow access
 
-    return Response.redirect(new URL(redirectPath, nextUrl));
+  if (isPublicRoute) {
+    return null;
   }
 
-  // Allow access if user is signed in or route is public
+  const callbackUrl = nextUrl.pathname + nextUrl.search;
+
+  if (!isSignedIn) {
+    const signInUrl = new URL("/auth/sign-in", nextUrl.origin);
+    signInUrl.searchParams.set("callbackUrl", callbackUrl);
+    return Response.redirect(signInUrl);
+  }
+
+  console.log("User role:", userRole);
+
+  if (!userRole) {
+    const completeProfileUrl = new URL(
+      "/auth/complete-profile",
+      nextUrl.origin,
+    );
+    completeProfileUrl.searchParams.set("callbackUrl", callbackUrl);
+    return Response.redirect(completeProfileUrl);
+  }
+
+  // Otherwise allow access
   return null;
 });
 

@@ -9,7 +9,6 @@ import { sendVerificationEmail } from "~/lib/mail";
 import { generateVerificationToken } from "~/lib/tokens";
 import { type UpdateProfileSchema } from "~/schemas";
 import { update } from "~/server/auth";
-import { getSession } from "next-auth/react";
 
 export async function updateProfile(
   values: z.infer<typeof UpdateProfileSchema>,
@@ -67,7 +66,6 @@ export async function updateProfile(
       role: updatedUser.role,
     },
   });
-  await getSession();
 
   return {
     success: !updateEmail

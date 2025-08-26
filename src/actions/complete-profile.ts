@@ -7,7 +7,6 @@ import { currentUser } from "~/lib/authentication";
 import { db } from "~/server/db";
 import { type CompleteProfileSchema } from "~/schemas";
 import { update } from "~/server/auth";
-import { getSession } from "next-auth/react";
 
 export async function completeProfile(
   values: z.infer<typeof CompleteProfileSchema>,
@@ -42,7 +41,6 @@ export async function completeProfile(
       role: updatedUser.role,
     },
   });
-  await getSession();
 
   return { success: "Perfil completado." };
 }
