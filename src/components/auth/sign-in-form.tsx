@@ -117,7 +117,7 @@ export function SignInForm() {
                         <Input
                           {...field}
                           disabled={isPending}
-                          placeholder="name@domain.com"
+                          placeholder="nombre@sanignacio.edu.uy"
                           type="email"
                           autoComplete="email"
                         />
@@ -146,7 +146,7 @@ export function SignInForm() {
                         size="sm"
                         variant="link"
                         asChild
-                        className="px-0 font-normal"
+                        className="justify-start px-0 font-normal"
                       >
                         <Link href="/auth/forgot-password">
                           ¿Olvidaste tu contraseña?

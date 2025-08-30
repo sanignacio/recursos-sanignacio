@@ -96,9 +96,17 @@ export const authConfig = {
   },
   callbacks: {
     async signIn({ user, account }: { user: User; account?: Account | null }) {
-      // Skip email verification check for OAuth
+      // If is OAuth user
       if (account?.provider !== "credentials") {
-        return true;
+        // Only allow access to users with @sanignacio.edu.uy email and verified email
+        if (
+          account?.emailVerified &&
+          typeof account.email === "string" &&
+          account.email.endsWith("@sanignacio.edu.uy")
+        )
+          return true;
+        // Prevent sign in if not @sanignacio.edu.uy email or email not verified
+        return false;
       }
 
       const existingUser = await getUserById(user.id!);
@@ -127,7 +135,11 @@ export const authConfig = {
 
       return true;
     },
-    async session({ token, session }) {
+    async session({ token, trigger, session }) {
+      if (trigger === "update" && session.user.role) {
+        session.user.role = token.role as UserRole;
+      }
+
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
@@ -143,7 +155,10 @@ export const authConfig = {
 
       return session;
     },
-    async jwt({ token }) {
+    async jwt({ token, trigger, session }) {
+      if (trigger === "update" && session.user.role) {
+        token.role = session.role as UserRole;
+      }
       if (!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);

@@ -1,8 +1,8 @@
 import { Resend } from "resend";
 
 import { EmailVerification } from "~/components/emails/email-verification";
-import { PasswordReset } from "~/components/emails/password-reset";
-import { TwoFactorAuthentication } from "~/components/emails/two-factor-authentication";
+import { PasswordReset } from "~/components/emails/email-password-reset";
+import { TwoFactorAuthentication } from "~/components/emails/email-two-factor-authentication";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

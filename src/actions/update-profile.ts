@@ -8,7 +8,6 @@ import { db } from "~/server/db";
 import { sendVerificationEmail } from "~/lib/mail";
 import { generateVerificationToken } from "~/lib/tokens";
 import { type UpdateProfileSchema } from "~/schemas";
-import { update } from "~/server/auth";
 
 export async function updateProfile(
   values: z.infer<typeof UpdateProfileSchema>,
@@ -47,7 +46,7 @@ export async function updateProfile(
     );
   }
 
-  const updatedUser = await db.user.update({
+  await db.user.update({
     where: {
       id: dbUser.id,
     },
@@ -56,14 +55,6 @@ export async function updateProfile(
       tempEmail: user.isOAuth || !updateEmail ? undefined : values.email,
       role: values.role,
       isTwoFactorEnabled: user.isOAuth ? undefined : values.isTwoFactorEnabled,
-    },
-  });
-
-  update({
-    user: {
-      name: updatedUser.name,
-      isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
-      role: updatedUser.role,
     },
   });
 

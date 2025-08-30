@@ -66,7 +66,7 @@ export function ForgotPasswordForm() {
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="name~domain.com"
+                      placeholder="name@domain.com"
                       type="email"
                     />
                   </FormControl>

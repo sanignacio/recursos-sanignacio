@@ -53,7 +53,7 @@ export default async function RootLayout({
       >
         <SessionProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="flex w-full justify-end pt-4 pr-4">
+            <div className="flex w-full justify-end pt-3 pr-3">
               <ModeToggle />
             </div>
             {children}

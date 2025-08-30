@@ -22,10 +22,10 @@ export default function HomePage() {
               </h1>
             </Link>
             <h1 className="text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </h1>
             <p className="text-muted-foreground max-w-2xl leading-normal sm:text-lg sm:leading-8">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
             </p>
             <div className="mt-5 space-x-4">
               <SignInButton mode="redirect" asChild>

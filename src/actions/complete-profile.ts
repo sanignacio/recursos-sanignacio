@@ -6,7 +6,6 @@ import { getUserById } from "~/data/user";
 import { currentUser } from "~/lib/authentication";
 import { db } from "~/server/db";
 import { type CompleteProfileSchema } from "~/schemas";
-import { update } from "~/server/auth";
 
 export async function completeProfile(
   values: z.infer<typeof CompleteProfileSchema>,
@@ -27,18 +26,12 @@ export async function completeProfile(
     return { error: "No autorizado." };
   }
 
-  const updatedUser = await db.user.update({
+  await db.user.update({
     where: {
       id: dbUser.id,
     },
     data: {
       role: values.role,
-    },
-  });
-
-  update({
-    user: {
-      role: updatedUser.role,
     },
   });
 

@@ -101,7 +101,7 @@ export default function UpdateProfileForm() {
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="John Doe"
+                    placeholder="Tu Nombre"
                     disabled={isPending}
                   />
                 </FormControl>
@@ -121,7 +121,7 @@ export default function UpdateProfileForm() {
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="name@domain.com"
+                        placeholder="nombre@sanignacio.edu.uy"
                         disabled={isPending ?? !!user.tempEmail}
                       />
                     </FormControl>

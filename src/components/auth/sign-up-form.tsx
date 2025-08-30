@@ -76,7 +76,7 @@ export function SignUpForm() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Nombre</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -100,7 +100,7 @@ export function SignUpForm() {
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder="name@domain.com"
+                        placeholder="nombre@sanignacio.edu.uy"
                         type="email"
                         autoComplete="email"
                       />
@@ -157,7 +157,7 @@ export function SignUpForm() {
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="w-full">
                           <SelectValue placeholder="Seleccionar rol" />
                         </SelectTrigger>
                         <SelectContent>
