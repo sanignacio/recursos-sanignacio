@@ -11,7 +11,7 @@ export const publicRoutes: string[] = [
 
 /**
  * An array of routes that are used for authentication
- * These routes will redirect signed in users to /settings
+ * These routes will redirect signed in users to DEFAULT_SIGNIN_REDIRECT
  * @type {string[]}
  */
 export const authRoutes: string[] = [

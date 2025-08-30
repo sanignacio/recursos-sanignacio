@@ -45,12 +45,13 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <SessionProvider session={session}>
-      <html lang="es" suppressHydrationWarning>
-        <body
-          className={cn("relative", inter.className)}
-          suppressHydrationWarning
-        >
+    <html lang="es" suppressHydrationWarning>
+      <head />
+      <body
+        className={cn("relative", inter.className)}
+        suppressHydrationWarning
+      >
+        <SessionProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="flex w-full justify-end pt-4 pr-4">
               <ModeToggle />
@@ -58,8 +59,8 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
           <Toaster />
-        </body>
-      </html>
-    </SessionProvider>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }

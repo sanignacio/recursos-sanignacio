@@ -13,55 +13,34 @@ export const { auth } = NextAuth(authConfig);
 export default auth((req) => {
   const { nextUrl } = req;
   const isSignedIn = !!req.auth;
-  const userRole = req.auth?.user?.role;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
-
-  // Skip middleware for API authentication endpoints
   if (isApiAuthRoute) {
     return null;
   }
 
-  // Redirect signed-in users away from authentication pages
   if (isAuthRoute) {
     if (isSignedIn) {
       return Response.redirect(new URL(DEFAULT_SIGNIN_REDIRECT, nextUrl));
     }
-    return null; // Allow access if not signed in
-  }
-
-  // Treat users not signed in or without role as unauthenticated
-  // Unauthenticated users can only access public routes
-  // Not signed in users are redirected to /auth/sign-in
-  // Signed in users with no role are redirected to /auth/complete-profile
-  // If the route is public, allow access
-
-  if (isPublicRoute) {
     return null;
   }
 
-  const callbackUrl = nextUrl.pathname + nextUrl.search;
+  if (!isSignedIn && !isPublicRoute) {
+    let callbackUrl = nextUrl.pathname;
+    if (nextUrl.search) {
+      callbackUrl += nextUrl.search;
+    }
 
-  if (!isSignedIn) {
-    const signInUrl = new URL("/auth/sign-in", nextUrl.origin);
-    signInUrl.searchParams.set("callbackUrl", callbackUrl);
-    return Response.redirect(signInUrl);
-  }
+    const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
-  console.log("User role:", userRole);
-
-  if (!userRole) {
-    const completeProfileUrl = new URL(
-      "/auth/complete-profile",
-      nextUrl.origin,
+    return Response.redirect(
+      new URL(`/auth/sign-in?callbackUrl=${encodedCallbackUrl}`, nextUrl),
     );
-    completeProfileUrl.searchParams.set("callbackUrl", callbackUrl);
-    return Response.redirect(completeProfileUrl);
   }
 
-  // Otherwise allow access
   return null;
 });
 

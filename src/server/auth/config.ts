@@ -26,7 +26,7 @@ import { getUserById } from "~/data/user";
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
 declare module "next-auth" {
-  interface Session extends DefaultSession {
+  interface Session {
     user: {
       tempEmail: string | null;
       role: UserRole | null;
@@ -133,18 +133,19 @@ export const authConfig = {
       }
 
       if (session.user) {
-        session.user.role = token.role as UserRole | null;
+        session.user.role = token.role as UserRole;
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
-        session.user.name = token.name;
-        session.user.email = token.email!;
-        session.user.tempEmail = token.tempEmail as string | null;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
+        session.user.tempEmail = token.tempEmail as string;
         session.user.isOAuth = token.isOAuth as boolean;
       }
 
       return session;
     },
-    async jwt({ token, user, trigger, session }) {
+    async jwt({ token }) {
       if (!token.sub) return token;
+
       const existingUser = await getUserById(token.sub);
       if (!existingUser) return token;
 
@@ -156,11 +157,6 @@ export const authConfig = {
       token.tempEmail = existingUser.tempEmail;
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
-
-      if (trigger === "update" && session?.user) {
-        token.user = session?.user;
-        return token;
-      }
 
       return token;
     },
