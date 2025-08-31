@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+branch_name=$(git symbolic-ref --short HEAD)
+retcode=$?
+non_push_suffix="_local"
+
+if [ $retcode -ne 0 ]; then
+    echo "🤡💀 Detached HEAD detected. Congratulations, clown. 💀🤡"
+    echo "What's next? Coding in Notepad? Absolute circus act. 🎪"
+    exit 1
+fi
+
+if [[ $branch_name == *$non_push_suffix ]]; then
+    echo "🙃🛑 Branch '$branch_name' ends with '$non_push_suffix', so no pushing for you. 💀💤"
+    echo "Translation: you're too much of a coward to push this garbage to origin. 🗑️"
+    echo "Pathetic. 🤡"
+else
+    echo
+    echo "🚀🔥 Hold on tight! Pushing your precious branch '$branch_name' to origin... Don't mess it up. 🔥🚀"
+    git push origin $branch_name
+    echo "🎉🤡 Congrats! Somehow your code survived the push. Miracles happen, right? 🤡🎉"
+fi
