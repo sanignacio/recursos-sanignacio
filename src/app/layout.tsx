@@ -4,11 +4,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 
-import { ModeToggle } from "~/components/mode-toggle";
 import { ThemeProvider } from "~/components/theme-provider";
 import { Toaster } from "~/components/ui/sonner";
 import { cn } from "~/lib/utils";
 import { auth } from "~/server/auth";
+import DefaultNavbar from "~/components/default-navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,10 +53,7 @@ export default async function RootLayout({
       >
         <SessionProvider session={session ?? undefined}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="flex w-full justify-end pt-3 pr-3">
-              <ModeToggle />
-            </div>
-            {children}
+            <DefaultNavbar>{children}</DefaultNavbar>
           </ThemeProvider>
           <Toaster />
         </SessionProvider>

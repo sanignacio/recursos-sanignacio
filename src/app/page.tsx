@@ -20,8 +20,8 @@ export default function HomePage() {
 
   return (
     <>
-      <main className="flex h-full min-h-[calc(100vh-36px-48px)] flex-col items-center justify-center">
-        <section className="space-y-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:py-32">
+      <main className="flex flex-col items-center justify-start">
+        <section className="flex h-[calc(100vh-36px-48px)] w-full flex-col items-center justify-center space-y-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:py-32">
           <div className="container flex max-w-5xl flex-col items-center gap-4 text-center">
             <div className="mb-5 text-5xl font-bold md:text-6xl lg:text-7xl">
               San Ignacio <FlipWords words={words} />
@@ -50,7 +50,61 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        <section className="w-full py-20">
+          <div className="container mx-auto max-w-4xl space-y-12 text-center">
+            <div>
+              <h2 className="mb-4 text-3xl font-bold">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
+                accusantium!
+              </h2>
+              <p className="text-muted-foreground leading-relaxed sm:text-lg">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="mb-4 text-3xl font-bold">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
+                accusantium!
+              </h2>
+              <p className="text-muted-foreground leading-relaxed sm:text-lg">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed
+                nisi. Nulla quis sem at nibh elementum imperdiet.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="mb-4 text-3xl font-bold">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
+                accusantium!
+              </h2>
+              <p className="text-muted-foreground leading-relaxed sm:text-lg">
+                Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue
+                semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
+                Class aptent taciti sociosqu ad litora torquent.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="mb-4 text-3xl font-bold">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
+                accusantium!
+              </h2>
+              <p className="text-muted-foreground leading-relaxed sm:text-lg">
+                Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.
+                Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque
+                sem at dolor.
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
+
       <Footer />
     </>
   );

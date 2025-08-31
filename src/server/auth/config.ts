@@ -26,6 +26,7 @@ import { getUserById } from "~/data/user";
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
 declare module "next-auth" {
+  // eslint-disable-next-line no-unused-vars
   interface Session {
     user: {
       tempEmail: string | null;

@@ -39,14 +39,14 @@ export function EmailVerification({
           <Container className="mx-auto my-0 max-w-[480px] px-0 pt-5 pb-12">
             <Link href={baseUrl} className="flex items-center text-gray-800">
               <Img
-                src={`${baseUrl}/shield-check.png`}
+                src={`${baseUrl}/printer.png`}
                 width="32"
                 height="32"
-                alt="Auth"
+                alt="Recursos San Ignacio"
                 className="mr-1 -ml-1"
               />
               <Heading as="h1" className="m-0 text-3xl font-bold">
-                Auth
+                Recursos San Ignacio
               </Heading>
             </Link>
 
