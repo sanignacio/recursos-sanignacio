@@ -3,40 +3,48 @@
 
 echo '🏗️👷 Styling, testing and building your project before committing'
 
-# Check Prettier standards
-pnpm run format:check ||
-(
-    echo '🤢🤮🤢🤮 Its F**KING RAW - Your styling looks disgusting. 🤢🤮🤢🤮
-            Prettier Check Failed. Run pnpm run format, add changes and try commit again.';
-    false;
-)
+# Function to ask and run a command if the user agrees
+ask_and_run() {
+    local msg="$1"
+    local cmd="$2"
 
-# Check ESLint Standards
-pnpm run lint ||
-(
-        echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 
-                ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
-        false; 
-)
+    echo "$msg"
+    read -p "🗑️🤡 Wanna see me fix your dumpster fire of code? (y/N): " answer
+    case "$answer" in
+        [Yy]* )
+            echo "🛠️🔧 Alright, brace yourself, I'm doing this because clearly you can't... 🥱"
+            $cmd
+            if [ $? -ne 0 ]; then
+                echo "❌ Ugh, even my superior AI skills can't save this mess. Do it yourself, genius! 💥🤡"
+                exit 1
+            else
+                echo "🎉✨ Look at that! I made your trash code sparkle like magic! 🪄✅"
+            fi
+            ;;
+        * )
+            echo "⛔ Pff, coward. Go fix it yourself, mortal. 😤"
+            exit 1
+            ;;
+    esac
+}
+
+# Check Prettier standards
+pnpm run format:check || ask_and_run "🤢🤮 Prettier Check Failed." "pnpm run format:write"
+
+# Check ESLint standards
+pnpm run lint || ask_and_run "😤 ESLint Check Failed." "pnpm run lint:fix"
 
 # Check tsconfig standards
-pnpm run typecheck ||
-(
-    echo '🤡😂❌🤡 Failed Type check. 🤡😂❌🤡
-            Are you seriously trying to write that? Make the changes required above.'
-    false;
+pnpm run typecheck || (
+    echo '🤡😂❌ Failed Type check. Please fix the TypeScript errors above.'
+    exit 1
 )
 
-# If everything passes... Now we can commit
-echo '🤔🤔🤔🤔... Alright.... Code looks good to me... Trying to build now. 🤔🤔🤔🤔'
-
-pnpm run build ||
-(
-    echo '❌👷🔨❌ Better call Bob... Because your build failed ❌👷🔨❌
-            Next build failed: View the errors above to see why. 
-    '
-    false;
+# Build
+echo '🤔🤔🤔... Trying to build...'
+pnpm run build || (
+    echo '❌👷🔨 Build failed. Check errors above.'
+    exit 1
 )
 
-# If everything passes... Now we can commit
-echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅'
+echo '✅✅✅ All checks passed. Proceeding with commit.'
