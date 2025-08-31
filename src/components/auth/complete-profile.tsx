@@ -54,7 +54,7 @@ export function CompleteProfileForm() {
           }
 
           if (data.success) {
-            update();
+            update(values);
             const redirectTo = callbackUrl ?? DEFAULT_SIGNIN_REDIRECT;
             window.location.href = redirectTo;
           }

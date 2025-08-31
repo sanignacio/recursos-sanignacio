@@ -97,17 +97,17 @@ export const authConfig = {
   },
   callbacks: {
     async signIn({ user, account }: { user: User; account?: Account | null }) {
-      // If is OAuth user
-      if (account?.provider !== "credentials") {
-        // Only allow access to users with @sanignacio.edu.uy email and verified email
-        if (
-          account?.emailVerified &&
-          typeof account.email === "string" &&
-          account.email.endsWith("@sanignacio.edu.uy")
-        )
-          return true;
-        // Prevent sign in if not @sanignacio.edu.uy email or email not verified
+      if (
+        !account ||
+        (typeof account.email === "string" &&
+          !account.email.endsWith("@sanignacio.edu.uy"))
+      ) {
+        // The email domain should be sanignacio.edu.uy
         return false;
+      }
+
+      if (account?.provider !== "credentials") {
+        return true;
       }
 
       const existingUser = await getUserById(user.id!);

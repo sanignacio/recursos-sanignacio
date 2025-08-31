@@ -3,11 +3,7 @@
  * These routes does not require authentication
  * @type {string[]}
  */
-export const publicRoutes: string[] = [
-  "/",
-  "/auth/email-verification",
-  "/auth/complete-profile",
-];
+export const publicRoutes: string[] = ["/", "/auth/email-verification"];
 
 /**
  * An array of routes that are used for authentication
@@ -21,6 +17,8 @@ export const authRoutes: string[] = [
   "/auth/forgot-password",
   "/auth/reset-password",
 ];
+
+export const completeProfileRoute = "/auth/complete-profile";
 
 /**
  * The prefix for API authentication routes
