@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Only for now until we fix the git push errors
+exit 1
+
 branch_name=$(git symbolic-ref --short HEAD)
 retcode=$?
 non_push_suffix="_local"

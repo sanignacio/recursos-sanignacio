@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { SessionProvider } from "next-auth/react";
 
 import { ThemeProvider } from "~/components/theme-provider";
@@ -10,7 +10,7 @@ import { cn } from "~/lib/utils";
 import { auth } from "~/server/auth";
 import DefaultNavbar from "~/components/default-navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = localFont({ src: "../../public/avenir-lt-std.woff2" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -47,13 +47,11 @@ export default async function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head />
-      <body
-        className={cn("relative", inter.className)}
-        suppressHydrationWarning
-      >
+      <body className={cn("relative w-full", font.className)}>
         <SessionProvider session={session ?? undefined}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <DefaultNavbar>{children}</DefaultNavbar>
+            <DefaultNavbar />
+            {children}
           </ThemeProvider>
           <Toaster />
         </SessionProvider>

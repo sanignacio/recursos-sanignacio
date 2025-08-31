@@ -6,6 +6,8 @@ import { Footer } from "~/components/footer";
 import { Button } from "~/components/ui/button";
 import { FlipWords } from "~/components/ui/flip-words";
 
+export const dynamic = "force-static";
+
 export default function HomePage() {
   const words = [
     "imprime",
