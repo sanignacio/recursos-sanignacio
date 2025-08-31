@@ -51,7 +51,7 @@ export default async function RootLayout({
         className={cn("relative", inter.className)}
         suppressHydrationWarning
       >
-        <SessionProvider session={session}>
+        <SessionProvider session={session ?? undefined}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="flex w-full justify-end pt-3 pr-3">
               <ModeToggle />

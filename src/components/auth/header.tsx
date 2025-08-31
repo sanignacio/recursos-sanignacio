@@ -1,4 +1,4 @@
-import { ShieldCheck } from "lucide-react";
+import { Printer } from "lucide-react";
 import Link from "next/link";
 
 interface AuthHeaderProps {
@@ -9,7 +9,7 @@ export function Header({ label }: AuthHeaderProps) {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-y-3">
       <Link href="/" className="flex items-center">
-        <ShieldCheck strokeWidth={2.5} className="mr-1 h-auto w-10" />
+        <Printer strokeWidth={2.5} className="mr-1 h-auto w-6" />
         <h2 className="text-xl font-bold">Recursos San Ignacio</h2>
       </Link>
       <p className="text-muted-foreground text-sm">{label}</p>

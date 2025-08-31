@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, ShieldCheck } from "lucide-react";
+import { Menu, Printer } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -44,7 +44,7 @@ export function Navbar() {
       </div>
 
       <Link href="/server" className="mr-8 flex items-center">
-        <ShieldCheck strokeWidth={2.5} className="mr-1 h-auto w-8" />
+        <Printer strokeWidth={2.5} className="mr-1 h-auto w-6" />
         <h2 className="text-sm font-bold">Recursos San Ignacio</h2>
       </Link>
 

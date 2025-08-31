@@ -159,7 +159,7 @@ export default function UpdateProfileForm() {
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Elegí un rol" />
                     </SelectTrigger>
                   </FormControl>
