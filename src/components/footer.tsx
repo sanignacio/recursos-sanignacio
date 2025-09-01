@@ -10,7 +10,7 @@ export function Footer() {
         <span className="space-x-2">
           <Button variant="link" className="px-1 text-xs" asChild>
             <Link
-              href="https://www.github.com/0-Sandy"
+              href="https://github.com/0-Sandy"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -20,6 +20,20 @@ export function Footer() {
           <Button variant="link" className="px-1 text-xs" asChild>
             <Link href="#" target="_blank" rel="noopener noreferrer">
               Máximo
+            </Link>
+          </Button>
+          <Button variant="link" className="px-1 text-xs" asChild>
+            <Link
+              href="https://github.com/facuandy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Facundo
+            </Link>
+          </Button>
+          <Button variant="link" className="px-1 text-xs" asChild>
+            <Link href="#" target="_blank" rel="noopener noreferrer">
+              Alejandro
             </Link>
           </Button>
         </span>

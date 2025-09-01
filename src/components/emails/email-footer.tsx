@@ -11,7 +11,7 @@ export default function EmailFooter() {
       </Link>
       ・ Creado por{" "}
       <Link
-        href="https://www.github.com/0-Sandy"
+        href="https://github.com/0-Sandy"
         className="px-1 text-gray-500 underline underline-offset-2"
         target="_blank"
         rel="noopener noreferrer"
@@ -25,6 +25,22 @@ export default function EmailFooter() {
         rel="noopener noreferrer"
       >
         Máximo
+      </Link>
+      <Link
+        href="https://github.com/facuandy"
+        className="px-1 text-gray-500 underline underline-offset-2"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Facundo
+      </Link>
+      <Link
+        href="#"
+        className="px-1 text-gray-500 underline underline-offset-2"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Alejandro
       </Link>
     </Text>
   );

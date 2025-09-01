@@ -7,6 +7,9 @@ import "./src/env.js";
 /** @type {import("next").NextConfig} */
 const config = {
   allowedDevOrigins: ["192.168.1.45"],
+  experimental: {
+    reactCompiler: true,
+  },
 };
 
 export default config;

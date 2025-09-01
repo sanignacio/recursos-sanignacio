@@ -51,6 +51,7 @@ Iniciar el servidor
 
 - **Next.js** – Framework principal para la aplicación web.
 - **React** – Librería para la construcción de la interfaz de usuario.
+- **React Compiler** – Compilador automático de React 19 que optimiza el rendimiento.
 - **NextAuth.js** – Manejo de autenticación, incluyendo inicio de sesión con Google.
 - **Google** – Proveedor de inicio de sesión con OAuth.
 - **Resend** – Servicio para envío de correos electrónicos desde la app.
@@ -71,11 +72,11 @@ Iniciar el servidor
 
 Para ejecutar este proyecto, deberá agregar las siguientes variables de entorno a su archivo .env, podes copiar el .env.example
 
-`DATABASE_URL`, `DIRECT_URL`
+`DATABASE_URL`,
 
-`AUTH_URL`, `AUTH_SECRET`
+`AUTH_URL`, `AUTH_SECRET`,
 
-`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
+`AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`,
 
 `RESEND_API_KEY`
 
@@ -150,5 +151,7 @@ GET /api/items/${id}
 
 ## 👥 Autores
 
-- [Martin](https://www.github.com/0-Sandy)
-- [Maximo](https://www.github.com/)
+- [Martin](https://github.com/0-Sandy)
+- [Máximo](#)
+- [Facundo](https://github.com/facuandy)
+- [Alejandro](#)
