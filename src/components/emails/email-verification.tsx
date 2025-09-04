@@ -3,67 +3,92 @@ import {
   Button,
   Container,
   Head,
+  Heading,
+  Hr,
   Html,
+  Img,
+  Link,
   Preview,
+  pixelBasedPreset,
   Section,
   Tailwind,
   Text,
 } from "@react-email/components";
-import EmailFooter from "./email-footer";
-import { EmailHeader } from "./email-header";
 
-interface EmailVerificationProps {
+interface VerificationProps {
   name: string | null;
   verifyLink: string;
 }
 
-export function EmailVerification({
-  name,
-  verifyLink,
-}: EmailVerificationProps) {
+const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "";
+
+export const VerificationEmail = ({ name, verifyLink }: VerificationProps) => {
+  const previewText = `Verificación de correo electrónico`;
+
   return (
     <Html>
-      <Head>
-        <title>Verificación de correo electrónico</title>
-      </Head>
-      <Preview>
-        Verifique la dirección de correo electrónico de su cuenta de Recursos
-        San Ignacio
-      </Preview>
-      <Tailwind>
-        <Body className="bg-white font-sans text-gray-900">
-          <Container className="mx-auto my-0 max-w-[480px] px-0 pt-5 pb-12">
-            <EmailHeader />
-
-            <Text className="text-xl">
-              Hola{" "}
-              <strong>{typeof name === "string" ? name : "Usuario"}</strong>,
-              hay una cuenta registrada con su correo electrónico.
+      <Head />
+      <Tailwind
+        config={{
+          presets: [pixelBasedPreset],
+        }}
+      >
+        <Body className="mx-auto my-auto bg-white px-2 font-sans">
+          <Preview>{previewText}</Preview>
+          <Container className="mx-auto my-[40px] max-w-[465px] rounded border border-solid border-[#eaeaea] p-[20px]">
+            <Section className="mt-[32px]">
+              <Img
+                src={`${baseUrl}/logo.png`}
+                width="40"
+                height="37"
+                alt="Logo Recursos San Ignacio"
+                className="mx-auto my-0"
+              />
+            </Section>
+            <Heading className="mx-0 my-[30px] p-0 text-center text-[24px] font-normal text-black">
+              Verifica tu correo electrónico de{" "}
+              <strong>Recursos San Ignacio</strong>
+            </Heading>
+            <Text className="text-[14px] leading-[24px] text-black">
+              Hola {name},
             </Text>
-
-            <Section className="rounded-md border border-solid border-gray-300 p-6 text-center">
-              <Text className="m-0 mb-3 text-left">
-                ¡Saludos de <strong>Recursos San Ignacio</strong>!
-              </Text>
-              <Text className="m-0 mb-3 text-left">
-                Se registró una cuenta de Recursos San Ignacio con tu dirección
-                de correo electrónico. Queremos asegurarnos de que seas tú. Haz
-                clic en el botón de abajo para verificar tu dirección de correo
-                electrónico.
-              </Text>
-
+            <Text className="text-[14px] leading-[24px] text-black">
+              Se creo una cuenta con tu dirección de correo electrónico.
+              Queremos asegurarnos de que seas tú. Haz clic en el botón de abajo
+              para verificar tu dirección de correo electrónico.
+            </Text>
+            <Section className="mt-[32px] mb-[32px] text-center">
               <Button
+                className="rounded bg-[#000000] px-5 py-3 text-center text-[12px] font-semibold text-white no-underline"
                 href={verifyLink}
-                className="rounded-md bg-gray-900 px-6 py-2 text-sm font-semibold text-white"
               >
                 Verificar
               </Button>
             </Section>
-
-            <EmailFooter />
+            <Text className="text-[14px] leading-[24px] text-black">
+              o copia y pega esta URL en tu navegador:{" "}
+              <Link href={verifyLink} className="text-blue-600 no-underline">
+                {verifyLink}
+              </Link>
+            </Text>
+            <Hr className="mx-0 my-[26px] w-full border border-solid border-[#eaeaea]" />
+            <Text className="text-[12px] leading-[24px] text-[#666666]">
+              Si no fue usted, simplemente ignore y elimine este mensaje. Para
+              mantener su cuenta segura, no reenvíe este correo electrónico a
+              nadie.
+            </Text>
           </Container>
         </Body>
       </Tailwind>
     </Html>
   );
-}
+};
+
+VerificationEmail.PreviewProps = {
+  name: "test",
+  verifyLink: "https://link.com",
+} as VerificationProps;
+
+export default VerificationEmail;

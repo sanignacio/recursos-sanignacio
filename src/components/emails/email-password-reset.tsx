@@ -3,67 +3,91 @@ import {
   Button,
   Container,
   Head,
+  Heading,
+  Hr,
   Html,
+  Img,
+  Link,
   Preview,
+  pixelBasedPreset,
   Section,
   Tailwind,
   Text,
 } from "@react-email/components";
-import EmailFooter from "./email-footer";
-import { EmailHeader } from "./email-header";
 
 interface PasswordResetProps {
   name: string | null;
   resetLink: string;
 }
 
-export function PasswordReset({ name, resetLink }: PasswordResetProps) {
+const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "";
+
+export const PasswordResetEmail = ({ name, resetLink }: PasswordResetProps) => {
+  const previewText = `Restablecer contraseña`;
+
   return (
     <Html>
-      <Head>
-        <title>Restablecer contraseña</title>
-      </Head>
-      <Preview>
-        Restablecer la contraseña de su cuenta de Recursos San Ignacio
-      </Preview>
-      <Tailwind>
-        <Body className="bg-white font-sans text-gray-900">
-          <Container className="mx-auto my-0 max-w-[480px] px-0 pt-5 pb-12">
-            <EmailHeader />
-
-            <Text className="text-xl">
-              Hola{" "}
-              <strong>{typeof name === "string" ? name : "Usuario"}</strong>, tu
-              cuenta ha solicitado un cambio de contraseña.
+      <Head />
+      <Tailwind
+        config={{
+          presets: [pixelBasedPreset],
+        }}
+      >
+        <Body className="mx-auto my-auto bg-white px-2 font-sans">
+          <Preview>{previewText}</Preview>
+          <Container className="mx-auto my-[40px] max-w-[465px] rounded border border-solid border-[#eaeaea] p-[20px]">
+            <Section className="mt-[32px]">
+              <Img
+                src={`${baseUrl}/logo.png`}
+                width="40"
+                height="37"
+                alt="Logo Recursos San Ignacio"
+                className="mx-auto my-0"
+              />
+            </Section>
+            <Heading className="mx-0 my-[30px] p-0 text-center text-[24px] font-normal text-black">
+              Restablece tu contraseña de <strong>Recursos San Ignacio</strong>
+            </Heading>
+            <Text className="text-[14px] leading-[24px] text-black">
+              Hola {name},
             </Text>
-
-            <Section className="rounded-md border border-solid border-gray-300 p-6 text-center">
-              <Text className="m-0 mb-3 text-left">
-                ¡Saludos de <strong>Recursos San Ignacio</strong>!
-              </Text>
-              <Text className="m-0 mb-3 text-left">
-                Alguien recientemente solicitó un cambio de contraseña para su
-                cuenta de Recursos San Ignacio. Si fue usted, haga clic en el
-                botón de abajo para establecer una nueva contraseña.
-              </Text>
-
+            <Text className="text-[14px] leading-[24px] text-black">
+              Alguien recientemente solicitó un cambio de contraseña para su
+              cuenta de Recursos San Ignacio. Si fue usted, haga clic en el
+              botón de abajo para establecer una nueva contraseña.
+            </Text>
+            <Section className="mt-[32px] mb-[32px] text-center">
               <Button
+                className="rounded bg-[#000000] px-5 py-3 text-center text-[12px] font-semibold text-white no-underline"
                 href={resetLink}
-                className="rounded-md bg-gray-900 px-6 py-2 text-sm font-semibold text-white"
               >
                 Restablecer contraseña
               </Button>
-
-              <Text className="m-0 my-3 text-left">
-                Si no desea cambiar su contraseña o no lo solicitó, simplemente
-                ignore y elimine este mensaje.
-              </Text>
             </Section>
-
-            <EmailFooter />
+            <Text className="text-[14px] leading-[24px] text-black">
+              o copia y pega esta URL en tu navegador:{" "}
+              <Link href={resetLink} className="text-blue-600 no-underline">
+                {resetLink}
+              </Link>
+            </Text>
+            <Hr className="mx-0 my-[26px] w-full border border-solid border-[#eaeaea]" />
+            <Text className="text-[12px] leading-[24px] text-[#666666]">
+              Si no querés cambiar tu contraseña o no lo solicitó, simplemente
+              ignore y elimine este mensaje. Para mantener su cuenta segura, no
+              reenvíe este correo electrónico a nadie.
+            </Text>
           </Container>
         </Body>
       </Tailwind>
     </Html>
   );
-}
+};
+
+PasswordResetEmail.PreviewProps = {
+  name: "test",
+  resetLink: "https://link.com",
+} as PasswordResetProps;
+
+export default PasswordResetEmail;

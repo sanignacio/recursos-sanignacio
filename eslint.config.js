@@ -4,7 +4,7 @@ const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
 });
 
-export default [
+const eslintConfig = [
   {
     ignores: [".next", "next-env.d.ts"],
   },
@@ -14,6 +14,7 @@ export default [
     rules: {
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "require-await": "off",
+      "react/no-unescaped-entities": "off",
     },
   },
   {
@@ -22,3 +23,5 @@ export default [
     },
   },
 ];
+
+export default eslintConfig;

@@ -1,8 +1,8 @@
 import { Resend } from "resend";
 
-import { EmailVerification } from "~/components/emails/email-verification";
-import { PasswordReset } from "~/components/emails/email-password-reset";
-import { TwoFactorAuthentication } from "~/components/emails/email-two-factor-authentication";
+import { VerificationEmail } from "~/components/emails/email-verification";
+import { PasswordResetEmail } from "~/components/emails/email-password-reset";
+import { TwoFactorAuthenticationEmail } from "~/components/emails/email-two-factor-authentication";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -19,7 +19,7 @@ export async function sendVerificationEmail(
     from: "San Ignacio Recursos <confirmation-recursos-sanignacio@resend.dev>",
     to: [email],
     subject: "Verificación de Email",
-    react: EmailVerification({ name, verifyLink }),
+    react: VerificationEmail({ name, verifyLink }),
   });
 }
 
@@ -34,7 +34,7 @@ export async function sendPasswordResetEmail(
     from: "San Ignacio Recursos <reset-recursos-sanignacio@resend.dev>",
     to: [email],
     subject: "Restablecimiento de Contraseña",
-    react: PasswordReset({ name, resetLink }),
+    react: PasswordResetEmail({ name, resetLink }),
   });
 }
 
@@ -47,6 +47,6 @@ export async function sendTwoFactorTokenEmail(
     from: "San Ignacio Recursos <2fa-recursos-sanignacio@resend.dev>",
     to: [email],
     subject: "Código de Autenticación de Dos Factores",
-    react: TwoFactorAuthentication({ name, token }),
+    react: TwoFactorAuthenticationEmail({ name, token }),
   });
 }
