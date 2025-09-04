@@ -16,7 +16,7 @@ export async function sendVerificationEmail(
   const verifyLink = `${domain}/auth/email-verification?token=${token}`;
 
   await resend.emails.send({
-    from: "San Ignacio Recursos <confirmation@recursos.sanignacio.edu.uy>",
+    from: "San Ignacio Recursos <confirmation-recursos-sanignacio@resend.dev>",
     to: [email],
     subject: "Verificación de Email",
     react: EmailVerification({ name, verifyLink }),
@@ -31,7 +31,7 @@ export async function sendPasswordResetEmail(
   const resetLink = `${domain}/auth/reset-password?token=${token}`;
 
   await resend.emails.send({
-    from: "San Ignacio Recursos <reset@recursos.sanignacio.edu.uy>",
+    from: "San Ignacio Recursos <reset-recursos-sanignacio@resend.dev>",
     to: [email],
     subject: "Restablecimiento de Contraseña",
     react: PasswordReset({ name, resetLink }),
@@ -44,7 +44,7 @@ export async function sendTwoFactorTokenEmail(
   token: string,
 ) {
   await resend.emails.send({
-    from: "San Ignacio Recursos <2fa@recursos.sanignacio.edu.uy>",
+    from: "San Ignacio Recursos <2fa-recursos-sanignacio@resend.dev>",
     to: [email],
     subject: "Código de Autenticación de Dos Factores",
     react: TwoFactorAuthentication({ name, token }),

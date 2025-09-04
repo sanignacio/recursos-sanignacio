@@ -2,18 +2,14 @@ import {
   Body,
   Container,
   Head,
-  Heading,
   Html,
-  Img,
-  Link,
   Preview,
   Section,
   Tailwind,
   Text,
 } from "@react-email/components";
 import EmailFooter from "./email-footer";
-
-const baseUrl = process.env.AUTH_URL;
+import { EmailHeader } from "./email-header";
 
 interface TwoFactorAuthenticationProps {
   name: string | null;
@@ -35,21 +31,11 @@ export function TwoFactorAuthentication({
       <Tailwind>
         <Body className="bg-white font-sans text-gray-900">
           <Container className="mx-auto my-0 max-w-[480px] px-0 pt-5 pb-12">
-            <Link href={baseUrl} className="flex items-center text-gray-800">
-              <Img
-                src={`${baseUrl}/printer.png`}
-                width="32"
-                height="32"
-                className="mr-1 -ml-1"
-                alt="Recursos San Ignacio"
-              />
-              <Heading as="h1" className="m-0 text-3xl font-bold">
-                Recursos San Ignacio
-              </Heading>
-            </Link>
+            <EmailHeader />
 
             <Text className="text-xl">
-              Hola <strong>{typeof name === "string" ? name : "User"}</strong>,
+              Hola{" "}
+              <strong>{typeof name === "string" ? name : "Usuario"}</strong>,
               continua iniciando sesión en su cuenta ingresando el siguiente
               código.
             </Text>
