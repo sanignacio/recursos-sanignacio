@@ -26,15 +26,10 @@ import {
 } from "~/components/ui/select";
 import { CompleteProfileSchema } from "~/schemas";
 import { FormError } from "../form-error";
-import { useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { DEFAULT_SIGNIN_REDIRECT } from "@/routes";
+import { signOut } from "~/actions/sign-out";
+import { toast } from "sonner";
 
 export function CompleteProfileForm() {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
-  const { update } = useSession();
-
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
 
@@ -48,15 +43,14 @@ export function CompleteProfileForm() {
   const onSubmit = (values: z.infer<typeof CompleteProfileSchema>) => {
     startTransition(async () => {
       await completeProfile(values)
-        .then((data) => {
+        .then(async (data) => {
           if (data.error) {
             setError(data.error);
           }
 
           if (data.success) {
-            update(values);
-            const redirectTo = callbackUrl ?? DEFAULT_SIGNIN_REDIRECT;
-            window.location.href = redirectTo;
+            toast.info("Inicia sesión de nuevo para continuar.");
+            await signOut();
           }
         })
         .catch(() => setError("¡Ups! Algo salió mal."));
