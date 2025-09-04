@@ -42,7 +42,6 @@ export function SignUpForm() {
       password: "",
       confirm: "",
       name: "",
-      role: "STUDENT",
     },
   });
 
@@ -155,9 +154,11 @@ export function SignUpForm() {
                       <Select
                         disabled={isPending}
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
                       >
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger
+                          className="w-full"
+                          aria-label="Seleccionar rol"
+                        >
                           <SelectValue placeholder="Seleccionar rol" />
                         </SelectTrigger>
                         <SelectContent>

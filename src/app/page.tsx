@@ -5,7 +5,6 @@ import { SignInButton } from "~/components/auth/sign-in-button";
 import { Footer } from "~/components/footer";
 import { Button } from "~/components/ui/button";
 import { FlipWords } from "~/components/ui/flip-words";
-
 export default function HomePage() {
   const words = [
     "imprime",

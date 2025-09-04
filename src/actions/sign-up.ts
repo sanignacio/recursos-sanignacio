@@ -9,16 +9,8 @@ import { sendVerificationEmail } from "~/lib/mail";
 import { generateVerificationToken } from "~/lib/tokens";
 import { SignUpSchema } from "~/schemas";
 
-const SignUpSchemaWithDomain = SignUpSchema; //.refine(
-//  (data) => data.email.endsWith('@sanignacio.edu.uy'),
-//  {
-//    message: 'El email debe ser @sanignacio.edu.uy.',
-//    path: ['email']
-//  }
-//);
-
 export async function signUp(values: z.infer<typeof SignUpSchema>) {
-  const validatedFields = SignUpSchemaWithDomain.safeParse(values);
+  const validatedFields = SignUpSchema.safeParse(values);
 
   if (!validatedFields.success) {
     return {

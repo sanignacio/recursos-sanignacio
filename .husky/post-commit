@@ -19,7 +19,7 @@ if [[ $branch_name == *$non_push_suffix ]]; then
     echo "Pathetic. 🤡"
 else
     echo
-    echo "🚀🔥 Hold on tight! Pushing your precious branch '$branch_name' to origin... Don't mess it up. 🔥🚀"
+    echo "🚀🔥 Hold on tight! Pushing your precious branch '$branch_name' to origin... 🔥🚀"
     git push origin $branch_name
     echo "🎉🤡 Congrats! Somehow your code survived the push. Miracles happen, right? 🤡🎉"
 fi

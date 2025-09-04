@@ -35,11 +35,6 @@ declare module "next-auth" {
       isOAuth: boolean;
     } & DefaultSession["user"];
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
 }
 
 /**
@@ -50,15 +45,6 @@ declare module "next-auth" {
 export const authConfig = {
   providers: [
     GoogleProvider,
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Google provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/google
-     */
     CredentialsProvider({
       async authorize(credentials) {
         const validatedFields = SignInSchema.safeParse(credentials);
@@ -99,13 +85,14 @@ export const authConfig = {
     async signIn({ user, account }: { user: User; account?: Account | null }) {
       if (
         !account ||
-        (typeof account.email === "string" &&
-          !account.email.endsWith("@sanignacio.edu.uy"))
+        typeof account.email !== "string" ||
+        !account.email.endsWith("@sanignacio.edu.uy")
       ) {
-        // The email domain should be sanignacio.edu.uy
+        // The email domain should be sanignacio.edu.uy and email should be a string
         return false;
       }
 
+      // Skip email verification check for OAuth
       if (account?.provider !== "credentials") {
         return true;
       }
@@ -136,34 +123,38 @@ export const authConfig = {
 
       return true;
     },
-    async session({ token, trigger, session }) {
-      if (trigger === "update" && session.user.role) {
-        session.user.role = token.role as UserRole;
-      }
-
+    async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
 
-      if (session.user) {
+      if (token.role && session.user) {
         session.user.role = token.role as UserRole;
+      }
+
+      if (session.user) {
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
-        session.user.name = token.name as string;
+      }
+
+      if (session.user) {
+        session.user.name = token.name;
         session.user.email = token.email as string;
-        session.user.tempEmail = token.tempEmail as string;
+        session.user.tempEmail = token.tempEmail as string | null;
         session.user.isOAuth = token.isOAuth as boolean;
       }
 
       return session;
     },
-    async jwt({ token, trigger, session }) {
-      if (trigger === "update" && session.user.role) {
-        token.role = session.role as UserRole;
+    async jwt({ token }) {
+      if (!token.sub) {
+        return token;
       }
-      if (!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);
-      if (!existingUser) return token;
+
+      if (!existingUser) {
+        return token;
+      }
 
       const existingAccount = await getAccountByUserId(existingUser.id);
 

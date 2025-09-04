@@ -2,9 +2,14 @@ import { UserRole } from "@prisma/client";
 import * as z from "zod";
 
 export const SignInSchema = z.object({
-  email: z.string().email({
-    message: "Se requiere un correo electrónico válido.",
-  }),
+  email: z
+    .string()
+    .email({
+      message: "Se requiere un correo electrónico válido.",
+    })
+    .refine((val) => val.endsWith("@sanignacio.edu.uy"), {
+      message: "El email debe ser @sanignacio.edu.uy.",
+    }),
   password: z.string().min(1, {
     message: "Se requiere contraseña.",
   }),
@@ -13,9 +18,14 @@ export const SignInSchema = z.object({
 
 export const SignUpSchema = z
   .object({
-    email: z.string().email({
-      message: "Se requiere un correo electrónico válido.",
-    }),
+    email: z
+      .string()
+      .email({
+        message: "Se requiere un correo electrónico válido.",
+      })
+      .refine((val) => val.endsWith("@sanignacio.edu.uy"), {
+        message: "El email debe ser @sanignacio.edu.uy.",
+      }),
     password: z.string().min(8, {
       message: "Se requieren un mínimo de 8 caracteres.",
     }),
@@ -25,7 +35,12 @@ export const SignUpSchema = z
     name: z.string().min(1, {
       message: "El nombre es obligatorio.",
     }),
-    role: z.enum([UserRole.ADMIN, UserRole.TEACHER, UserRole.STUDENT]),
+    role: z
+      .enum([UserRole.ADMIN, UserRole.TEACHER, UserRole.STUDENT])
+      .optional()
+      .refine((val) => val !== undefined, {
+        message: "Se requiere un rol.",
+      }),
   })
   .refine((data) => data.password === data.confirm, {
     message: "Las contraseñas no coinciden.",
@@ -59,12 +74,22 @@ export const UpdateProfileSchema = z.object({
   email: z.string().email({
     message: "Se requiere un correo electrónico válido.",
   }),
-  role: z.enum([UserRole.ADMIN, UserRole.TEACHER, UserRole.STUDENT]),
+  role: z
+    .enum([UserRole.ADMIN, UserRole.TEACHER, UserRole.STUDENT])
+    .optional()
+    .refine((val) => val !== undefined, {
+      message: "Se requiere un rol.",
+    }),
   isTwoFactorEnabled: z.boolean(),
 });
 
 export const CompleteProfileSchema = z.object({
-  role: z.enum([UserRole.ADMIN, UserRole.TEACHER, UserRole.STUDENT]),
+  role: z
+    .enum([UserRole.ADMIN, UserRole.TEACHER, UserRole.STUDENT])
+    .optional()
+    .refine((val) => val !== undefined, {
+      message: "Se requiere un rol.",
+    }),
 });
 
 export const UpdatePasswordSchema = z

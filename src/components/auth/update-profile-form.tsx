@@ -159,8 +159,11 @@ export default function UpdateProfileForm() {
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Elegí un rol" />
+                    <SelectTrigger
+                      className="w-full"
+                      aria-label="Seleccionar rol"
+                    >
+                      <SelectValue placeholder="Seleccionar rol" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
