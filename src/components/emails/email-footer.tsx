@@ -4,7 +4,7 @@ export default function EmailFooter() {
   return (
     <Text className="mt-5 text-center text-xs text-gray-500">
       <Link
-        href="https://github.com/salimi-my/next-auth-starter"
+        href="https://github.com/sanignacio/recursos-sanignacio"
         className="font-semibold text-gray-500"
       >
         Recursos San Ignacio
