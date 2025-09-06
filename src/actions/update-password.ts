@@ -17,7 +17,7 @@ export async function updatePassword(
     return { error: "No autorizado." };
   }
 
-  if (user.isOAuth) {
+  if (!user.hasCredentials) {
     return { error: "No autorizado." };
   }
 

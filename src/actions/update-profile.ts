@@ -52,9 +52,11 @@ export async function updateProfile(
     },
     data: {
       name: values.name,
-      tempEmail: user.isOAuth || !updateEmail ? undefined : values.email,
+      tempEmail: !user.hasCredentials || updateEmail ? undefined : values.email,
       role: values.role,
-      isTwoFactorEnabled: user.isOAuth ? undefined : values.isTwoFactorEnabled,
+      isTwoFactorEnabled: user.hasCredentials
+        ? values.isTwoFactorEnabled
+        : undefined,
     },
   });
 

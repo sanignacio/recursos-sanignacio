@@ -33,6 +33,7 @@ declare module "next-auth" {
       role: UserRole | null;
       isTwoFactorEnabled: boolean;
       isOAuth: boolean;
+      hasCredentials: boolean;
     } & DefaultSession["user"];
   }
 }
@@ -44,7 +45,9 @@ declare module "next-auth" {
  */
 export const authConfig = {
   providers: [
-    GoogleProvider,
+    GoogleProvider({
+      allowDangerousEmailAccountLinking: true,
+    }),
     CredentialsProvider({
       async authorize(credentials) {
         const validatedFields = SignInSchema.safeParse(credentials);
@@ -141,6 +144,7 @@ export const authConfig = {
         session.user.email = token.email as string;
         session.user.tempEmail = token.tempEmail as string | null;
         session.user.isOAuth = token.isOAuth as boolean;
+        session.user.hasCredentials = token.hasCredentials as boolean;
       }
 
       return session;
@@ -159,6 +163,7 @@ export const authConfig = {
       const existingAccount = await getAccountByUserId(existingUser.id);
 
       token.isOAuth = !!existingAccount;
+      token.hasCredentials = !!existingUser.password;
       token.name = existingUser.name;
       token.email = existingUser.email;
       token.tempEmail = existingUser.tempEmail;

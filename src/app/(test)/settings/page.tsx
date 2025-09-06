@@ -26,7 +26,7 @@ export default async function SettingsPage() {
           <UpdateProfileForm />
         </CardContent>
       </Card>
-      {user?.isOAuth === false && (
+      {user?.hasCredentials === true && (
         <Card className="mt-6 w-full">
           <CardHeader>
             <h3 className="font-semibold">Actualizar contraseña</h3>

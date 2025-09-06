@@ -110,7 +110,7 @@ export default function UpdateProfileForm() {
             )}
           />
 
-          {user?.isOAuth === false && (
+          {user?.hasCredentials === true && (
             <FormField
               control={form.control}
               name="email"
@@ -179,7 +179,7 @@ export default function UpdateProfileForm() {
             )}
           />
 
-          {user?.isOAuth === false && (
+          {user?.hasCredentials === true && (
             <FormField
               control={form.control}
               name="isTwoFactorEnabled"
