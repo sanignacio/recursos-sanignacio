@@ -87,9 +87,8 @@ export const authConfig = {
   callbacks: {
     async signIn({ user, account }: { user: User; account?: Account | null }) {
       if (
-        !account ||
-        typeof account.email !== "string" ||
-        !account.email.endsWith("@sanignacio.edu.uy")
+        typeof user.email !== "string" ||
+        !user.email.endsWith("@sanignacio.edu.uy")
       ) {
         // The email domain should be sanignacio.edu.uy and email should be a string
         return false;

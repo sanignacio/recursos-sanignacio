@@ -46,9 +46,6 @@ export async function signUp(values: z.infer<typeof SignUpSchema>) {
 
   const verificationToken = await generateVerificationToken(newUser.id);
 
-  // const verifyLink = `http://localhost:3000/auth/email-verification?token=${verificationToken.token}`;
-  // console.log(`Verification link: ${verifyLink}`);
-
   await sendVerificationEmail(
     newUser.name,
     newUser.email,

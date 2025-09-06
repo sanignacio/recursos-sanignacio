@@ -30,6 +30,8 @@ export async function updateProfile(
     updateEmail = true;
   }
 
+  console.log("updateEmail: ", updateEmail);
+
   if (updateEmail) {
     const existingUser = await getUserByEmail(values.email);
 
@@ -52,7 +54,7 @@ export async function updateProfile(
     },
     data: {
       name: values.name,
-      tempEmail: !user.hasCredentials || updateEmail ? undefined : values.email,
+      tempEmail: user.hasCredentials || updateEmail ? values.email : undefined,
       role: values.role,
       isTwoFactorEnabled: user.hasCredentials
         ? values.isTwoFactorEnabled

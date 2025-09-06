@@ -1,4 +1,5 @@
 import { UserCog } from "lucide-react";
+import UpdateOauth from "~/components/auth/update-oauth";
 
 import UpdatePasswordForm from "~/components/auth/update-password-form";
 import UpdateProfileForm from "~/components/auth/update-profile-form";
@@ -26,6 +27,16 @@ export default async function SettingsPage() {
           <UpdateProfileForm />
         </CardContent>
       </Card>
+      {user?.isOAuth === true && (
+        <Card className="mt-6 w-full">
+          <CardHeader>
+            <h3 className="font-semibold">Actualizar OAuth</h3>
+          </CardHeader>
+          <CardContent>
+            <UpdateOauth />
+          </CardContent>
+        </Card>
+      )}
       {user?.hasCredentials === true && (
         <Card className="mt-6 w-full">
           <CardHeader>
