@@ -14,6 +14,8 @@ import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
 import { SignInButton } from "./auth/sign-in-button";
 import Link from "next/link";
+import { UserButton } from "./auth/user-button";
+import { useSession } from "next-auth/react";
 
 export default function DefaultNavbar() {
   const navItems = [
@@ -32,6 +34,7 @@ export default function DefaultNavbar() {
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <Navbar>
@@ -40,11 +43,27 @@ export default function DefaultNavbar() {
         <NavbarLogo />
         <NavItems items={navItems} />
         <div className="flex items-center gap-4">
-          <SignInButton mode="redirect" asChild>
-            <NavbarButton variant="secondary">Login</NavbarButton>
-          </SignInButton>
-          {/*<NavbarButton variant="primary">Test</NavbarButton>*/}
-          <ModeToggle />
+          {session?.user ? (
+            <NavbarButton
+              variant="secondary"
+              as="div"
+              className="flex items-center justify-center"
+            >
+              <UserButton />
+            </NavbarButton>
+          ) : (
+            <SignInButton mode="redirect" asChild>
+              <NavbarButton variant="secondary">Login</NavbarButton>
+            </SignInButton>
+          )}
+
+          <NavbarButton
+            variant="secondary"
+            as="div"
+            className="flex items-center justify-center"
+          >
+            <ModeToggle />
+          </NavbarButton>
         </div>
       </NavBody>
 
@@ -82,14 +101,14 @@ export default function DefaultNavbar() {
                 Login
               </NavbarButton>
             </SignInButton>
-            {/*<NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Test
-              </NavbarButton>*/}
-            <ModeToggle phoneMode />
+
+            <NavbarButton variant="secondary" className="w-full" as="div">
+              <UserButton phoneMode />
+            </NavbarButton>
+
+            <NavbarButton variant="secondary" className="w-full" as="div">
+              <ModeToggle phoneMode />
+            </NavbarButton>
           </div>
         </MobileNavMenu>
       </MobileNav>

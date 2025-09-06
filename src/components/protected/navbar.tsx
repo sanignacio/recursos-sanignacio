@@ -19,7 +19,7 @@ export function Navbar() {
 
   return (
     <nav className="flex h-16 w-full items-center border-b px-4">
-      <div className="mr-2 md:hidden">
+      <div className="mr-2 flex w-full items-center justify-end md:hidden">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
@@ -43,12 +43,7 @@ export function Navbar() {
         </DropdownMenu>
       </div>
 
-      <Link href="/server" className="mr-8 flex items-center">
-        <Printer strokeWidth={2.5} className="mr-1 h-auto w-6" />
-        <h2 className="text-sm font-bold">Recursos San Ignacio</h2>
-      </Link>
-
-      <div className="hidden items-center space-x-6 md:flex">
+      <div className="hidden w-full items-center justify-center space-x-6 md:flex">
         <Link
           href="/server"
           className={cn(
@@ -85,10 +80,6 @@ export function Navbar() {
         >
           Configuración
         </Link>
-      </div>
-
-      <div className="ml-auto flex items-center space-x-4">
-        <UserButton />
       </div>
     </nav>
   );

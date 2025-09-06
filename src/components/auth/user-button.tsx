@@ -14,14 +14,22 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { useCurrentUser } from "~/hooks/use-current-user";
+import { cn } from "~/lib/utils";
 
-export function UserButton() {
+export function UserButton({ phoneMode = false }: { phoneMode?: boolean }) {
   const user = useCurrentUser();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+        <Button
+          variant="ghost"
+          className={cn(
+            "relative h-8 rounded-full",
+            phoneMode ? "w-full" : "w-8",
+          )}
+        >
+          {phoneMode && <span className="pr-2">{user?.name}</span>}
           <Avatar className="h-8 w-8">
             <AvatarImage src={user?.image ?? ""} alt={user?.name ?? ""} />
             <AvatarFallback>
@@ -30,7 +38,10 @@ export function UserButton() {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end">
+      <DropdownMenuContent
+        className="w-56"
+        align={phoneMode ? "center" : "end"}
+      >
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="truncate text-sm leading-none font-medium">
