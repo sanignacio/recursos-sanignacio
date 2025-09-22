@@ -25,7 +25,7 @@ export default function DefaultNavbar() {
     },
     {
       name: "Encargar",
-      link: "#",
+      link: "/order",
     },
     {
       name: "Reservar",
