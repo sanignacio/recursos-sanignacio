@@ -32,3 +32,5 @@ export const apiAuthPrefix = "/api/auth";
  * @type {string}
  */
 export const DEFAULT_SIGNIN_REDIRECT = "/settings";
+
+export const SIGNIN_ERROR_URL = "/auth/error";

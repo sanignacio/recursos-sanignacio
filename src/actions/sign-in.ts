@@ -14,7 +14,8 @@ import {
 } from "~/lib/tokens";
 import { SignInSchema } from "~/schemas";
 import { signIn as authSignIn } from "~/server/auth";
-import { DEFAULT_SIGNIN_REDIRECT } from "@/routes";
+import { DEFAULT_SIGNIN_REDIRECT, SIGNIN_ERROR_URL } from "@/routes";
+import { redirect } from "next/navigation";
 
 export async function signIn(
   values: z.infer<typeof SignInSchema>,
@@ -120,7 +121,7 @@ export async function signIn(
         case "CredentialsSignin":
           return { error: "Correo electrónico o contraseña incorrectos." };
         default:
-          return { error: "¡Ups! Algo salió mal." };
+          return redirect(`${SIGNIN_ERROR_URL}?error=${error.type}`);
       }
     }
 
