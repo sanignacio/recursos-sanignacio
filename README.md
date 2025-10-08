@@ -23,7 +23,7 @@ Para ejecutar este proyecto ejecute
 
 ## 🏠 Ejecutar localmente
 
-Clonar el proyecto
+Clonar el proyecto o descargar y descomprimir el zip desde GitHub
 
 ```bash
   git clone https://github.com/0-Sandy/recursos-sanignacio
@@ -40,11 +40,19 @@ Instalar dependencias
 ```bash
   pnpm install
 ```
+o
+```bash
+  npm install
+```
 
 Iniciar el servidor
 
 ```bash
-  pnpm start
+  pnpm run dev
+```
+o
+```bash
+  npm run dev
 ```
 
 ## 🛠️ Herramientas usadas
