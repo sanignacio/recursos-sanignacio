@@ -66,7 +66,7 @@ export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
   };
 
   return (
-    <Card className="mx-auto max-w-xl min-w-[500px]">
+    <Card className="mx-auto max-w-xl md:min-w-[500px]">
       <CardContent className="p-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* File Input Area */}
