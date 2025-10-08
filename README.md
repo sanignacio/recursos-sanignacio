@@ -40,7 +40,7 @@ Instalar dependencias
 ```bash
   pnpm install
 ```
-o
+o tambien
 ```bash
   npm install
 ```
@@ -50,7 +50,7 @@ Iniciar el servidor
 ```bash
   pnpm run dev
 ```
-o
+o tambien
 ```bash
   npm run dev
 ```
