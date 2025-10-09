@@ -98,6 +98,29 @@ export function CompleteProfileForm() {
             )}
           />
           <FormError message={error} />
+
+          <p className="text-muted-foreground text-center text-xs">
+            Al completar tu perfil y guardar tu rol, aceptas nuestros{" "}
+            <a
+              href="/policies/terms"
+              className="text-primary hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Términos y Condiciones
+            </a>{" "}
+            y nuestra{" "}
+            <a
+              href="/privacy"
+              className="text-primary hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Política de Privacidad
+            </a>
+            .
+          </p>
+
           <Button disabled={isPending} type="submit" className="w-full">
             {isPending ? "Guardando..." : "Guardar rol"}
           </Button>

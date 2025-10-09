@@ -7,37 +7,35 @@ export function Footer() {
     <footer className="flex justify-center">
       <small className="text-muted-foreground">
         Creado por{" "}
-        <span className="space-x-2">
-          <Button variant="link" className="px-1 text-xs" asChild>
+        <span>
+          <Button variant="link" className="px-0 pr-1 text-xs" asChild>
             <Link
-              href="https://github.com/0-Sandy"
+              href="https://github.com/sanignacio"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Martin
+              Maflux Studios
             </Link>
           </Button>
-          <Button variant="link" className="px-1 text-xs" asChild>
-            <Link href="#" target="_blank" rel="noopener noreferrer">
-              Máximo
-            </Link>
-          </Button>
+          y
           <Button variant="link" className="px-1 text-xs" asChild>
             <Link
-              href="https://github.com/facuandy"
+              href="https://www.sanignacio.edu.uy"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Facundo
-            </Link>
-          </Button>
-          <Button variant="link" className="px-1 text-xs" asChild>
-            <Link href="#" target="_blank" rel="noopener noreferrer">
-              Alejandro
+              San Ignacio
             </Link>
           </Button>
         </span>
-        &copy; {new Date().getFullYear()}.
+        &copy; {new Date().getFullYear()}. {"  •  "}
+        <Button variant="link" className="px-1 text-xs" asChild>
+          <Link href="/policies/terms">Términos y Condiciones de Uso</Link>
+        </Button>
+        {"  •  "}
+        <Button variant="link" className="px-1 text-xs" asChild>
+          <Link href="/policies/privacy">Política de Privacidad</Link>
+        </Button>
       </small>
     </footer>
   );

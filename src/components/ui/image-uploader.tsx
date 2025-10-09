@@ -11,7 +11,7 @@ interface ImageUploaderProps {
   onSubmit?: (files: File[]) => void;
 }
 
-export default function ImageUploader({ onSubmit }: ImageUploaderProps) {
+export function ImageUploader({ onSubmit }: ImageUploaderProps) {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 

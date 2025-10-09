@@ -180,6 +180,29 @@ export function SignUpForm() {
               />
             </div>
             <FormError message={error} />
+
+            <p className="text-muted-foreground text-center text-xs">
+              Al crear una cuenta, aceptas nuestros{" "}
+              <a
+                href="/policies/terms"
+                className="text-primary hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Términos y Condiciones
+              </a>{" "}
+              y nuestra{" "}
+              <a
+                href="/privacy"
+                className="text-primary hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Política de Privacidad
+              </a>
+              .
+            </p>
+
             <Button disabled={isPending} type="submit" className="w-full">
               {isPending && (
                 <>

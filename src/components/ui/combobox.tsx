@@ -31,7 +31,13 @@ type Option = {
   subOptions?: Option[];
 };
 
-export function ComboBoxResponsive({ options }: { options: Option[] }) {
+export function ComboBoxResponsive({
+  options,
+  id,
+}: {
+  options: Option[];
+  id?: string;
+}) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [stack, setStack] = React.useState<Option[][]>([options]);
@@ -115,7 +121,7 @@ export function ComboBoxResponsive({ options }: { options: Option[] }) {
   if (isDesktop) {
     return (
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
+        <PopoverTrigger asChild id={id}>
           <Button
             variant="outline"
             className="w-[200px] cursor-pointer justify-start"
@@ -132,7 +138,7 @@ export function ComboBoxResponsive({ options }: { options: Option[] }) {
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
+      <DrawerTrigger asChild id={id}>
         <Button
           variant="outline"
           className="w-[200px] cursor-pointer justify-start"

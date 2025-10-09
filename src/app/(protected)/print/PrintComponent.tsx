@@ -3,7 +3,9 @@
 import { Printer } from "lucide-react";
 import { ComboBoxResponsive } from "~/components/ui/combobox";
 
-import ImageUploader from "~/components/ui/image-uploader";
+import { ImageUploader } from "~/components/ui/image-uploader";
+import { Label } from "~/components/ui/label";
+import { NumberInput } from "~/components/ui/number-input";
 
 const options = [
   {
@@ -57,7 +59,12 @@ export default function PrintComponent() {
         <Printer className="mr-2 h-auto w-6 md:w-8" />
         Imprimir
       </h2>
-      <ComboBoxResponsive options={options} />
+      <div className="flex items-center justify-center gap-2">
+        <Label htmlFor="materials">Materiales</Label>
+        <ComboBoxResponsive options={options} id="materials" />
+        <NumberInput id="quantity" />
+      </div>
+
       <ImageUploader onSubmit={handleUpload} />
     </div>
   );
