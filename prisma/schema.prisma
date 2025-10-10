@@ -25,6 +25,7 @@ model User {
   image                   String?
   password                String?
   role                    UserRole?
+  passes                  Int                     @default(0)
   accounts                Account[]
   isTwoFactorEnabled      Boolean                 @default(false)
   twoFactorConfirmation   TwoFactorConfirmation?

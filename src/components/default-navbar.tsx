@@ -53,7 +53,7 @@ export default function DefaultNavbar() {
             </NavbarButton>
           ) : (
             <SignInButton mode="redirect" asChild>
-              <NavbarButton variant="secondary">Login</NavbarButton>
+              <NavbarButton variant="secondary">Iniciar Sesión</NavbarButton>
             </SignInButton>
           )}
 

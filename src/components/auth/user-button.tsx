@@ -55,10 +55,7 @@ export function UserButton({ phoneMode = false }: { phoneMode?: boolean }) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer" asChild>
-            <Link href="/server">Servidor</Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer" asChild>
-            <Link href="/client">Cliente</Link>
+            <Link href="/pass">Tenes {user?.passes ?? 0} cuponeras</Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer" asChild>
             <Link href="/settings">Configuración</Link>

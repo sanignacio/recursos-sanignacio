@@ -31,6 +31,7 @@ declare module "next-auth" {
     user: {
       tempEmail: string | null;
       role: UserRole | null;
+      passes: number;
       isTwoFactorEnabled: boolean;
       isOAuth: boolean;
       hasCredentials: boolean;
@@ -135,6 +136,10 @@ export const authConfig = {
       }
 
       if (session.user) {
+        session.user.passes = (token.passes as number) ?? 0;
+      }
+
+      if (session.user) {
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
       }
 
@@ -167,6 +172,7 @@ export const authConfig = {
       token.email = existingUser.email;
       token.tempEmail = existingUser.tempEmail;
       token.role = existingUser.role;
+      token.passes = existingUser.passes;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
       return token;
