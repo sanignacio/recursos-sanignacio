@@ -1,7 +1,7 @@
 import PassComponent from "./PassComponent";
 
 export const metadata = {
-  title: "Boletos",
+  title: "Cuponera",
 };
 
 export default function PassPage() {

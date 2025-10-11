@@ -92,21 +92,23 @@ export default function DefaultNavbar() {
             </Link>
           ))}
           <div className="flex w-full flex-col gap-4">
-            <SignInButton mode="redirect" asChild>
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Login
+            {session?.user ? (
+              <NavbarButton variant="secondary" className="w-full" as="div">
+                <UserButton phoneMode />
               </NavbarButton>
-            </SignInButton>
+            ) : (
+              <SignInButton mode="redirect" asChild>
+                <NavbarButton
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  variant="primary"
+                  className="w-full"
+                >
+                  Login
+                </NavbarButton>
+              </SignInButton>
+            )}
 
-            <NavbarButton variant="secondary" className="w-full" as="div">
-              <UserButton phoneMode />
-            </NavbarButton>
-
-            <NavbarButton variant="secondary" className="w-full" as="div">
+            <NavbarButton variant="secondary" className="w-full p-0" as="div">
               <ModeToggle phoneMode />
             </NavbarButton>
           </div>

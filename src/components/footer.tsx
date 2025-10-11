@@ -5,7 +5,7 @@ import { Button } from "~/components/ui/button";
 export function Footer() {
   return (
     <footer className="flex justify-center">
-      <small className="text-muted-foreground">
+      <small className="text-muted-foreground text-center">
         Creado por{" "}
         <span>
           <Button variant="link" className="px-0 pr-1 text-xs" asChild>
